@@ -20,6 +20,7 @@ public class AVPlayer {
 		mp = new MediaPlayer();
 		String path = ftpw.downloadFile(file);
 		mp.setDataSource(path);
+		mp.prepare();
 		mp.start();
 	}
 
@@ -63,5 +64,9 @@ public class AVPlayer {
 	
 	public LinkedList<String> getPlaylist(){
 		return this.playlist;
+	}
+	
+	public void addToPlaylist(String file){
+		
 	}
 }
