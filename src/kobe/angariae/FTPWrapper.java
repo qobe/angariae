@@ -3,6 +3,7 @@ package kobe.angariae;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -70,18 +71,17 @@ public class FTPWrapper {
 	}
 	
 	/**
-	 * returns a string array to be used for displaying
-	 * contents of a directory
+	 * returns a list of files in ftp present working dir
+	 * to be used for displaying contents of a directory
 	 * @return
 	 */
-	public String[] getDirListing(){
-		String[] dirContents = null;
+	public LinkedList<String> getDirListing(){
+		LinkedList<String> dirContents = new LinkedList<String>();
 		try {
 			FTPFile[] files = ftpc.listFiles();
 			for(int i=0;i<files.length;i++){
-				dirContents[i]=files[i].toString();
+				dirContents.add(files[i].toString());
 			}
-			
 		} catch (IOException e) {
 			//ftp reply code 421, connection closed, try re-establishing
 			e.printStackTrace();
@@ -107,7 +107,7 @@ public class FTPWrapper {
 	 * and downloads it to path specified in downloadsDir
 	 * @param filename
 	 */
-	public void downloadFile(String filename){
+	public String downloadFile(String filename){
 		try {
 			File fileDestination = new File(downloadsDir+filename);
 			if(!fileDestination.exists()){
@@ -119,7 +119,7 @@ public class FTPWrapper {
 			// connection closure
 			e.printStackTrace();
 		}
-		
+		return downloadsDir+filename;
 	}
 	
 	

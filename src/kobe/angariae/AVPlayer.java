@@ -1,38 +1,28 @@
 package kobe.angariae;
 import java.io.IOException;
 import java.util.LinkedList;
-
 import android.media.MediaPlayer;
-import android.net.Uri;
 
 public class AVPlayer {
 
 	private MediaPlayer mp;
-	//private String[] playlist;
+	private FTPWrapper ftpw;
 	private int indexp;
 	private LinkedList<String> playlist;
 	
-	public AVPlayer(String[] dirContents){
-		this.playlist = new LinkedList();
-		for(int i=0; i<dirContents.length;i++){
-			this.playlist.add(dirContents[i]);
-		}
-		this.indexp = 0;
+	public AVPlayer(FTPWrapper fw){
+		this.ftpw = fw;
 	}
 	
-	public void play(String file) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException {
+	public void play(String file) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
+		playlist = ftpw.getDirListing();
+		indexp = 0;
 		mp = new MediaPlayer();
-		mp.setDataSource(file);
+		String path = ftpw.downloadFile(file);
+		mp.setDataSource(path);
 		mp.start();
 	}
-	
-	public void play() throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
-		mp = new MediaPlayer();
-		mp.setDataSource(playlist.get(indexp));
-		mp.start();
-		indexp++;
-	}
-	
+
 	public void start(){
 		mp.start();
 	}
