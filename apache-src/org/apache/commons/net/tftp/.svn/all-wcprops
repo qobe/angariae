@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp
+END
+TFTPDataPacket.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPDataPacket.java
+END
+TFTP.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTP.java
+END
+TFTPPacketException.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPPacketException.java
+END
+TFTPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPClient.java
+END
+TFTPRequestPacket.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPRequestPacket.java
+END
+TFTPPacket.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPPacket.java
+END
+TFTPWriteRequestPacket.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPWriteRequestPacket.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/package-info.java
+END
+TFTPAckPacket.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPAckPacket.java
+END
+TFTPReadRequestPacket.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPReadRequestPacket.java
+END
+TFTPErrorPacket.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/tftp/TFTPErrorPacket.java
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/chargen
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/chargen/package-info.java
+END
+CharGenUDPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/chargen/CharGenUDPClient.java
+END
+CharGenTCPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/chargen/CharGenTCPClient.java
+END

@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io
+END
+ToNetASCIIOutputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/ToNetASCIIOutputStream.java
+END
+DotTerminatedMessageWriter.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/DotTerminatedMessageWriter.java
+END
+FromNetASCIIInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/FromNetASCIIInputStream.java
+END
+CopyStreamListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/CopyStreamListener.java
+END
+CopyStreamEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/CopyStreamEvent.java
+END
+Util.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/Util.java
+END
+CRLFLineReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/CRLFLineReader.java
+END
+FromNetASCIIOutputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/FromNetASCIIOutputStream.java
+END
+DotTerminatedMessageReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/DotTerminatedMessageReader.java
+END
+ToNetASCIIInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/ToNetASCIIInputStream.java
+END
+CopyStreamException.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/CopyStreamException.java
+END
+CopyStreamAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/CopyStreamAdapter.java
+END
+SocketInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/SocketInputStream.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/package-info.java
+END
+SocketOutputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/io/SocketOutputStream.java
+END

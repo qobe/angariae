@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser
+END
+ParserInitializationException.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/ParserInitializationException.java
+END
+CompositeFileEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/CompositeFileEntryParser.java
+END
+MLSxEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/MLSxEntryParser.java
+END
+ConfigurableFTPFileEntryParserImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/ConfigurableFTPFileEntryParserImpl.java
+END
+VMSFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/VMSFTPEntryParser.java
+END
+NetwareFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/NetwareFTPEntryParser.java
+END
+MacOsPeterFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/MacOsPeterFTPEntryParser.java
+END
+OS400FTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/OS400FTPEntryParser.java
+END
+OS2FTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/OS2FTPEntryParser.java
+END
+RegexFTPFileEntryParserImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/RegexFTPFileEntryParserImpl.java
+END
+MVSFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/MVSFTPEntryParser.java
+END
+EnterpriseUnixFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/EnterpriseUnixFTPEntryParser.java
+END
+FTPFileEntryParserFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/FTPFileEntryParserFactory.java
+END
+UnixFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/UnixFTPEntryParser.java
+END
+DefaultFTPFileEntryParserFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/DefaultFTPFileEntryParserFactory.java
+END
+VMSVersioningFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/VMSVersioningFTPEntryParser.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/package-info.java
+END
+NTFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/NTFTPEntryParser.java
+END
+FTPTimestampParserImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/FTPTimestampParserImpl.java
+END
+FTPTimestampParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ftp/parser/FTPTimestampParser.java
+END

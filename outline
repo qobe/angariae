@@ -1,0 +1,4 @@
+A top down outline
+:user creates a "collection"
+::collection is just an FTP connection
+:::FTP connection stays active until user selects "disconnect"

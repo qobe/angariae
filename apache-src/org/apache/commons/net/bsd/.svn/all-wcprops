@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/bsd
+END
+RExecClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/bsd/RExecClient.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/bsd/package-info.java
+END
+RCommandClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/bsd/RCommandClient.java
+END
+RLoginClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/bsd/RLoginClient.java
+END
