@@ -1,6 +1,8 @@
 package kobe.angariae;
 import java.io.IOException;
 import java.util.LinkedList;
+
+import kobe.angariae.Connections.Connection;
 import android.media.MediaPlayer;
 
 public class AVPlayer {

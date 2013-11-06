@@ -60,28 +60,12 @@ has-props
 
 758
 
-FTPConnection.java
-file
+Connections
+dir
 
 
 
 add
-
-
-
-
-
-has-props
-has-prop-mods
-
-
-
-
-
-
-copied
-https://file-stream-client.googlecode.com/svn/angariae/src/kobe/angariae/FTPWrapper.java
-7
 
 FTPWrapper.java
 file
