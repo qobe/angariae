@@ -1,4 +1,5 @@
 A top down outline
-:user creates a "collection"
-::collection is just an FTP connection
-:::FTP connection stays active until user selects "disconnect"
+:user creates a Connection to a remote server
+:user can then browse the contents of that connection
+:selected media can then be streamed from the connected server or downloaded
+
