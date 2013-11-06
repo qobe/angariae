@@ -60,6 +60,13 @@ has-props
 
 758
 
+Activities
+dir
+
+
+
+add
+
 Connections
 dir
 
@@ -106,7 +113,7 @@ file
 
 
 
-
+delete
 2013-08-22T19:39:35.759000Z
 1aaea55054996285472befb7a90ed3f5
 2013-08-19T00:08:32.216440Z

@@ -4,5 +4,6 @@
     <string name="app_name">MediaSLAYER</string>
     <string name="action_settings">Settings</string>
     <string name="new_connection_label">Add a new connection</string>
+    <string name="up_directory">..</string>
 
 </resources>
