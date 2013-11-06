@@ -4,9 +4,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQuery;
 
 public class Database{
-	SQLiteDatabase db;
-	String dbPath = "/MEDIAYEAH/";
+	public SQLiteDatabase db;
+	private final String path = "pathtodb";
 	public Database(){
-		SQLiteDatabase.openDatabase(dbPath, null, db.CREATE_IF_NECESSARY);
+		SQLiteDatabase.openDatabase(path, null, db.CREATE_IF_NECESSARY);
 	}
 }

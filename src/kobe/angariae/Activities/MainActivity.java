@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import kobe.angariae.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,17 +14,23 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-
+	
+	private static final String PATH_TO_DB = "/sdcard/mediaslayer/Connections";
+	private SQLiteDatabase db;
+	
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SQLiteDatabase.openDatabase(PATH_TO_DB, null, db.CREATE_IF_NECESSARY);
         
         Button newConnection = (Button)findViewById(R.id.new_connection);
         newConnection.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				//Launch AddConnectionActivity
+				//store Intent fields on return
 			}
         });
         
