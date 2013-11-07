@@ -1,4 +1,3 @@
-angariae
-========
-
-File transport wrapper for android
+mediaSLAYER
+============
+connect to remote server browse/play music!!!!!!!!!!!!!!!!!!!!!!!!!!
