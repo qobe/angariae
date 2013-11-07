@@ -1,11 +1,15 @@
 package kobe.angariae.Activities;
 
+import java.io.File;
 import java.util.LinkedList;
 
 import kobe.angariae.R;
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.View;
@@ -16,28 +20,42 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	
-	private static final String PATH_TO_DB = "/sdcard/mediaslayer/Connections";
+	private static String PATH_TO_DB;
+	private static String TABLE_NAME = "Connections";
 	private SQLiteDatabase db;
-	private static final int NEW_CONNECTION_ACT_ID = 69;
+	private static final int NEW_CONNECTION_ID = 69;
 	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // SQLiteDatabase.openDatabase(PATH_TO_DB, null, db.CREATE_IF_NECESSARY);
+        
+        File f = new File(Environment.getExternalStorageDirectory().getPath()+"mediaSLAYER");
+        f.mkdirs();
+        PATH_TO_DB = f.toString()+"/"+"mediaSLAYER";
+        SQLiteDatabase.openDatabase(PATH_TO_DB, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+        String[] columns = {"Label","ServerAddress","Type","Username","Password"};
+        db.execSQL("CREATE TABLE "+ TABLE_NAME +" (Label TEXT,ServerAddress TEXT,"
+        			+"Type TEXT,Username TEXT,Password TEXT);"); 
         
         Button newConnection = (Button)findViewById(R.id.new_connection);
         newConnection.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(), AddConnectionActivity.class);
-				startActivityForResult(i, NEW_CONNECTION_ACT_ID);
+				startActivityForResult(i, NEW_CONNECTION_ID);
 			}
         });
-        
         ListView listview = (ListView)findViewById(R.id.listView1);
         LinkedList<String> list = new LinkedList<String>();
+        
+        Cursor cursor = db.query(TABLE_NAME, columns, null, null, null, null, null);
+        for(int i=0;i<cursor.getCount();i++){
+        	list.add(cursor.getString(cursor.getColumnIndex(columns[0])));
+        	cursor.moveToNext();
+        }
+        
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -54,14 +72,34 @@ public class MainActivity extends Activity {
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position,long id){
-				parent.removeView(view); //remove item from display
-				//delete from database
+//				parent.removeView(view); //remove item from display
+//				db.execSQL("DELETE FROM "+TABLE_NAME+" WHERE Label="+list.get(position)+";");//delete from database
 				return false;
 			}
 		});
         
     }
+    @Override
+    protected void onResume(){
+//    	adapter.notifyDataSetChanged();
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    	super.onActivityResult(requestCode, resultCode, data);
+    	if(resultCode == RESULT_OK && requestCode == NEW_CONNECTION_ID){
+    		Bundle b = data.getExtras();
+    		String label = b.getString("label");
+    		String serverAddr = b.getString("serverAddr");
+    		String type = b.getString("type");
+    		String uname = b.getString("uname");
+    		String password = b.getString("password");
+    		db.execSQL("INSERT INTO "+TABLE_NAME+" VALUES ("+label+","+serverAddr+","
+    				+type+","+uname+","+password+");");
+    		//refresh listView; listadapter.notifyDataSetChanged()
+    	}
+    	
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,18 +108,5 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-    	super.onActivityResult(requestCode, resultCode, data);
-    	if(resultCode == RESULT_OK && requestCode == NEW_CONNECTION_ACT_ID){
-    		Bundle b = data.getExtras();
-    		String serverAddr = b.getString("serverAddr");
-    		String type = b.getString("type");
-    		String uname = b.getString("uname");
-    		String password = b.getString("password");
-    		db.execSQL("INSERT INTO Connections VALUES ("+serverAddr+" "+type+" "+uname+" "+password+");");
-    	}
-    	
-    }
     
 }
