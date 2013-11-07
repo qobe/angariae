@@ -18,22 +18,21 @@ public class MainActivity extends Activity {
 	
 	private static final String PATH_TO_DB = "/sdcard/mediaslayer/Connections";
 	private SQLiteDatabase db;
+	private static final int NEW_CONNECTION_ACT_ID = 69;
 	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SQLiteDatabase.openDatabase(PATH_TO_DB, null, db.CREATE_IF_NECESSARY);
+       // SQLiteDatabase.openDatabase(PATH_TO_DB, null, db.CREATE_IF_NECESSARY);
         
         Button newConnection = (Button)findViewById(R.id.new_connection);
         newConnection.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				//Launch AddConnectionActivity
-				//Intent i = new Intent(getApplicationContext(), AddConnectionActivity.class);
-				//startActivityForResult(i, 69);
-				//store Intent fields on return
+				Intent i = new Intent(getApplicationContext(), AddConnectionActivity.class);
+				startActivityForResult(i, NEW_CONNECTION_ACT_ID);
 			}
         });
         
@@ -74,6 +73,14 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
     	super.onActivityResult(requestCode, resultCode, data);
+    	if(resultCode == RESULT_OK && requestCode == NEW_CONNECTION_ACT_ID){
+    		Bundle b = data.getExtras();
+    		String serverAddr = b.getString("serverAddr");
+    		String type = b.getString("type");
+    		String uname = b.getString("uname");
+    		String password = b.getString("password");
+    		db.execSQL("INSERT INTO Connections VALUES ("+serverAddr+" "+type+" "+uname+" "+password+");");
+    	}
     	
     }
     
