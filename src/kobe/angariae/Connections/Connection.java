@@ -7,5 +7,5 @@ public interface Connection {
 	void disconnect();
 	String download(String file);
 	void setDownloads(String path);
-	LinkedList<String> browse();
+	LinkedList<String> browse(String path);
 }

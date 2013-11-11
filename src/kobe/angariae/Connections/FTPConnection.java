@@ -18,23 +18,15 @@ public class FTPConnection implements Connection {
 	private FTPClient ftpc;
 	private String downloadsDir;
 	
-	/**
-	 * Empty constructor to ease use of ftpclient
-	 */
 	public FTPConnection(){
 		ftpc = new FTPClient();
+		ftpc.setControlKeepAliveTimeout(420);//set timeout to 7 minutes
 	}
 	
 	public void setDownloads(String path){
-		downloadsDir = path;
+		downloadsDir = path+"/";
 	}
 	
-	/**
-	 * initiates the ftp connection to the server
-	 * @param serverAddr
-	 * @param username
-	 * @param password
-	 */
 	public void connect(String serverAddr, String username, String password){
 		try{
 			int reply;
@@ -66,27 +58,22 @@ public class FTPConnection implements Connection {
 	}
 	
 
-	public LinkedList<String> browse(){
+	public LinkedList<String> browse(String path){
 		LinkedList<String> dirContents = new LinkedList<String>();
 		try {
+			if(path == ".."){
+				ftpc.changeToParentDirectory();
+			}else if (!path.equalsIgnoreCase(".")){
+				ftpc.changeWorkingDirectory(path);	
+			}
 			FTPFile[] files = ftpc.listFiles();
 			for(int i=0;i<files.length;i++){
 				dirContents.add(files[i].toString());
 			}
 		} catch (IOException e) {
-			//ftp reply code 421, connection closed, try re-establishing
 			e.printStackTrace();
 		}
 		return dirContents;
-	}
-	
-	public void changeDir(String path){
-		try {
-			ftpc.changeWorkingDirectory(path);
-		} catch (IOException e) {
-			// premature connection closure
-			e.printStackTrace();
-		}
 	}
 	
 	public String download(String filename){

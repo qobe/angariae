@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +21,7 @@ public class MainActivity extends Activity {
 	
 	private static String PATH_TO_DB;
 	private static String TABLE_NAME = "Connections";
+	private String[] columns = {"Label","ServerAddress","Type","Username","Password"};
 	private SQLiteDatabase db;
 	private static final int NEW_CONNECTION_ID = 69;
 	
@@ -35,7 +35,6 @@ public class MainActivity extends Activity {
         f.mkdirs();
         PATH_TO_DB = f.toString()+"/"+"mediaSLAYER";
         SQLiteDatabase.openDatabase(PATH_TO_DB, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-        String[] columns = {"Label","ServerAddress","Type","Username","Password"};
         db.execSQL("CREATE TABLE "+ TABLE_NAME +" (Label TEXT,ServerAddress TEXT,"
         			+"Type TEXT,Username TEXT,Password TEXT);"); 
         
@@ -61,13 +60,21 @@ public class MainActivity extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-				String item = (String)parent.getItemAtPosition(position);
-				//SELECT uname, passwd FROM Connections WHERE name = item;
-				//c = new Connection()
-				//c.connect(serverAddr, uname, passwd)
-				//Launch BrowseActivity pass Connection by Intent
+				//set destination for collection downloads
+				String label = (String)parent.getItemAtPosition(position);
+				File f = new File(PATH_TO_DB+"/"+label);
+				f.mkdirs();
+				//extract connection data from table
+				Cursor cursor = db.query(TABLE_NAME, columns, "Label="+label, null,null,null,null);
+				//prepare to launch activity
+				Intent i = new Intent(getApplicationContext(), BrowseActivity.class);
+				i.putExtra("dir", f.toString());
+				i.putExtra("ServerAddress", cursor.getString(cursor.getColumnIndex("ServerAddress")));
+				i.putExtra("Type",cursor.getString(cursor.getColumnIndex("Type")));
+				i.putExtra("Username",cursor.getString(cursor.getColumnIndex("Username")));
+				i.putExtra("Password", cursor.getString(cursor.getColumnIndex("Password")));
+				startActivity(i);//Launch BrowseActivity pass Connection by Intent
 			}
-        	
         });
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
 			@Override
@@ -78,10 +85,6 @@ public class MainActivity extends Activity {
 			}
 		});
         
-    }
-    @Override
-    protected void onResume(){
-//    	adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -94,8 +97,8 @@ public class MainActivity extends Activity {
     		String type = b.getString("type");
     		String uname = b.getString("uname");
     		String password = b.getString("password");
-    		db.execSQL("INSERT INTO "+TABLE_NAME+" VALUES ("+label+","+serverAddr+","
-    				+type+","+uname+","+password+");");
+    		db.execSQL("INSERT INTO "+TABLE_NAME+" VALUES ('"+label+"','"+serverAddr+"','"
+    				+type+"','"+uname+"','"+password+"');");
     		//refresh listView; listadapter.notifyDataSetChanged()
     	}
     	

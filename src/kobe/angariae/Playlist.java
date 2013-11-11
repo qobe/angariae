@@ -8,6 +8,8 @@ public class Playlist {
 	private int index;
 	private LinkedList<String> list;
 	
+	public Playlist(){}
+	
 	public Playlist(LinkedList<String> array){
 		list = new LinkedList<String>();
 		for(int i=0; i<array.size(); i++){

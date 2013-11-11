@@ -1,21 +1,28 @@
 package kobe.angariae;
 import java.io.IOException;
-import java.util.LinkedList;
 
-import kobe.angariae.Connections.Connection;
 import android.media.MediaPlayer;
 
 public class AVPlayer {
 
 	private MediaPlayer mp;
-	private Connection cn;
-	private Playlist playlist;
 	
-	public AVPlayer(Connection conn){
-		this.cn = conn;
-	}
+	public AVPlayer(){}
 	
-	public void play(String file) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
+	public void play(String file){
+		mp = new MediaPlayer();
+		try {
+			mp.setDataSource(file);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		mp.start();
 	}
 
 	public void start(){
@@ -30,24 +37,20 @@ public class AVPlayer {
 		mp.pause();
 	}
 	
-	public void next() throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
+	public void next(Playlist p) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
 		mp = new MediaPlayer();
-		mp.setDataSource(playlist.getNext());
+		mp.setDataSource(p.getNext());
 		mp.start();
 	}
 	
-	public void previous() throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
+	public void previous(Playlist p) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
 		mp = new MediaPlayer();
-		mp.setDataSource(playlist.getPrevious());
+		mp.setDataSource(p.getPrevious());
 		mp.start();
 	}
 	
-	public void shuffle(){
-		playlist.shuffle();
-	}
-	
-	public void repeat(){
-		
+	public void shuffle(Playlist p){
+		p.shuffle();
 	}
 	
 	public void seekTo(){

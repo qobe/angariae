@@ -29,7 +29,7 @@ public class HTTPConnection implements Connection{
 	}
 
 	@Override
-	public LinkedList<String> browse() {
+	public LinkedList<String> browse(String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
