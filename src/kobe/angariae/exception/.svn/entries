@@ -26,12 +26,26 @@ https://file-stream-client.googlecode.com/svn/angariae/src/kobe/angariae/excepti
 
 6a18e0a6-bf43-af26-c525-97830470b14d
 
+AnException.java
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
 Exception.java
 file
 8
 
 
-
+delete
 2013-08-27T19:20:40.787000Z
 e19aeeb4da2eeed523256ffaaf54c6ca
 2013-08-27T20:14:22.940644Z
@@ -45,7 +59,7 @@ has-props
 
 
 
-copied
+
 
 
 

@@ -6,6 +6,7 @@ import kobe.angariae.AVPlayer;
 import kobe.angariae.Playlist;
 import kobe.angariae.R;
 import kobe.angariae.Connections.*;
+import kobe.angariae.exception.AnException;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import android.widget.ListView;
 
 public class BrowseActivity extends ListActivity{
 	private Connection conn;
-	private AVPlayer av = new AVPlayer();
+	private AVPlayer av;
 	private ListView listview;
 	private ArrayAdapter<String> adapter;
 	private LinkedList<String> dirList;
@@ -39,11 +40,17 @@ public class BrowseActivity extends ListActivity{
         	conn = new FTPConnection();
         }
         conn.setDownloads(b.getString("dir"));
-        conn.connect(b.getString("ServerAddress"), b.getString("Username"), b.getString("Password"));
-        dirList = conn.browse(".");
+        av = new AVPlayer();
+        
+        try {
+			conn.connect(b.getString("ServerAddress"), b.getString("Username"), b.getString("Password"));
+			dirList = conn.browse(".");
+		} catch (AnException e) {
+			e.makeToast(BrowseActivity.this);
+		}
         
         listview = (ListView)findViewById(R.id.listView1);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dirList);
+        adapter = new ArrayAdapter<String>(BrowseActivity.this, android.R.layout.simple_list_item_1, dirList);
         listview.setAdapter(adapter);
         listview.setLongClickable(true);
         registerForContextMenu(listview);
@@ -52,7 +59,11 @@ public class BrowseActivity extends ListActivity{
         upDir.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				dirList = conn.browse("..");
+				try {
+					dirList = conn.browse("..");
+				} catch (AnException e) {
+					e.makeToast(BrowseActivity.this);
+				}
 				adapter.notifyDataSetChanged();
 			}
         });
@@ -61,7 +72,13 @@ public class BrowseActivity extends ListActivity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 				String item = (String)parent.getItemAtPosition(position);
-				if(!item.matches("*.*")){conn.browse(item);}
+				if(!item.matches("*.*")){
+					try {
+						conn.browse(item);
+					} catch (AnException e) {
+						e.makeToast(BrowseActivity.this);
+					}
+				}
 //				else av.play(item); //stream from server?
 //				if(item.matches("*.(3gp)|(mp4)|(m4a)|(aac)|(3gp)|(flac)|(mp3)|(wav)|(mid)|(xmf)|(mxmf)|(rtttl)|(rtx)|(ogg)|(mkv)|(ota)|(imy)"))
 			}
@@ -89,7 +106,11 @@ public class BrowseActivity extends ListActivity{
     	switch (item.getItemId()) {
     	case 1:
     		//add item selected to playlist
-    		playlist.enqueue(conn.download(dirList.get(info.position)));
+    		try {
+				playlist.enqueue(conn.download(dirList.get(info.position)));
+			} catch (AnException e) {
+				e.makeToast(BrowseActivity.this);
+			}
     	}
 		return true;
     }

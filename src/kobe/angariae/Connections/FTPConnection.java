@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import kobe.angariae.exception.AnException;
+
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -12,9 +14,6 @@ import org.apache.commons.net.ftp.FTPReply;
 
 public class FTPConnection implements Connection {
 
-	/**
-	 * private class globals
-	 */
 	private FTPClient ftpc;
 	private String downloadsDir;
 	
@@ -27,7 +26,7 @@ public class FTPConnection implements Connection {
 		downloadsDir = path+"/";
 	}
 	
-	public void connect(String serverAddr, String username, String password){
+	public void connect(String serverAddr, String username, String password) throws AnException{
 		try{
 			int reply;
 			ftpc.connect(serverAddr);
@@ -41,24 +40,23 @@ public class FTPConnection implements Connection {
 			//get reply code
 			ftpc.pass(password);
 			//get, check reply code
-		}catch(IOException e){
-			//connection fail, or username/password incorrect
-			//throw custom exception up to user level
-			e.printStackTrace();
+		}catch(java.net.UnknownHostException e){
+			throw new AnException("Error: Unknown host.",e);
+		}catch(IOException e){			
+			throw new AnException("Error: Failed to connect. Please check credentials",e);
 		}
 	}
 
-	public void disconnect(){
+	public void disconnect() throws AnException{
 		try {
 			ftpc.disconnect();
 		} catch (IOException e) {
-			//errors disconnecting
-			e.printStackTrace();
+			throw new AnException("Error: Could not disconnect.",e);
 		}
 	}
 	
 
-	public LinkedList<String> browse(String path){
+	public LinkedList<String> browse(String path) throws AnException{
 		LinkedList<String> dirContents = new LinkedList<String>();
 		try {
 			if(path == ".."){
@@ -71,12 +69,12 @@ public class FTPConnection implements Connection {
 				dirContents.add(files[i].toString());
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new AnException("Error: Connection is closed.",e);
 		}
 		return dirContents;
 	}
 	
-	public String download(String filename){
+	public String download(String filename) throws AnException{
 		try {
 			File fileDestination = new File(downloadsDir+filename);
 			if(!fileDestination.exists()){
@@ -86,7 +84,7 @@ public class FTPConnection implements Connection {
 			}
 		} catch (IOException e) {
 			// connection closure
-			e.printStackTrace();
+			throw new AnException("Error: Connection is closed.",e);
 		}
 		return downloadsDir+filename;
 	}
