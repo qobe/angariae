@@ -1,7 +1,7 @@
 package kobe.angariae.Activities;
 
 import java.io.File;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import kobe.angariae.DatabaseHelper;
 import kobe.angariae.R;
@@ -11,7 +11,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,9 +25,8 @@ public class MainActivity extends Activity {
 	private static String TABLE_NAME = "Connections";
 	private String[] columns = {"Label","ServerAddress","Type","Username","Password"};
 	private SQLiteDatabase db;
-	private LinkedList<String> list;
 	private static final int NEW_CONNECTION_ID = 69;
-
+	private ArrayAdapter<String> adapter;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +39,8 @@ public class MainActivity extends Activity {
 	    Toast t = Toast.makeText(this, db.getPath(), Toast.LENGTH_LONG);
         t.show();
         
-        Button newConnection = (Button)findViewById(R.id.new_connection);
-        newConnection.setOnClickListener(new View.OnClickListener(){
+        Button b = (Button)findViewById(R.id.new_connection);
+        b.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, AddConnectionActivity.class);
@@ -51,15 +49,15 @@ public class MainActivity extends Activity {
         });
 
         ListView listview = (ListView)findViewById(R.id.listView1);
-        LinkedList<String> list = new LinkedList<String>();
+        ArrayList<String> alist = new ArrayList<String>();
         Cursor cursor = db.query(TABLE_NAME, columns, null, null, null, null, null);
         if(cursor != null && cursor.moveToFirst()){
         	for(int i=0;i<cursor.getCount();i++){
-        		list.add(cursor.getString(cursor.getColumnIndex(columns[0])));
+        		alist.add(cursor.getString(cursor.getColumnIndex(columns[0])));
         		cursor.moveToNext();
         	}
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, alist);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 			@Override
@@ -83,19 +81,13 @@ public class MainActivity extends Activity {
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position,long id){
-//				parent.removeView(view); //remove item from display
-//				db.execSQL("DELETE FROM "+TABLE_NAME+" WHERE Label="+list.get(position)+";");//delete from database
+//				ContextMenu{Edit, Delete}
 				return false;
 			}
 		});
         
     }
-    
-    @Override
-    protected void onResume(){
-    	
-    }
-
+ 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
     	super.onActivityResult(requestCode, resultCode, data);
@@ -108,7 +100,8 @@ public class MainActivity extends Activity {
     		String password = b.getString("password");
     		db.execSQL("INSERT INTO "+TABLE_NAME+" VALUES ('"+label+"','"+serverAddr+"','"
     				+type+"','"+uname+"','"+password+"');");
-    		//refresh listView; listadapter.notifyDataSetChanged()
+    		adapter.add(label);
+    		adapter.notifyDataSetChanged();
     	}
     	
     }
