@@ -26,7 +26,13 @@ public class MainActivity extends Activity {
 	private String[] columns = {"Label","ServerAddress","Type","Username","Password"};
 	private SQLiteDatabase db;
 	private static final int NEW_CONNECTION_ID = 69;
+	private static final int EDIT_CONNECTION_ID = 24;
 	private ArrayAdapter<String> adapter;
+	
+	private void toast(String msg){
+		Toast t = Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG);
+		t.show();	
+	}
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +42,6 @@ public class MainActivity extends Activity {
 	    DatabaseHelper dHelper = new DatabaseHelper(MainActivity.this);
 	    db = dHelper.getWritableDatabase();
 	    
-	    Toast t = Toast.makeText(this, db.getPath(), Toast.LENGTH_LONG);
-        t.show();
         
         Button b = (Button)findViewById(R.id.new_connection);
         b.setOnClickListener(new View.OnClickListener(){
@@ -67,15 +71,17 @@ public class MainActivity extends Activity {
 				File f = new File(Environment.getExternalStorageDirectory()+File.separator+label);
 				f.mkdirs();
 				//extract connection data from table
-				Cursor cursor = db.query(TABLE_NAME, columns, "Label="+label, null,null,null,null);
-				//prepare to launch activity
-				Intent i = new Intent(getApplicationContext(), BrowseActivity.class);
-				i.putExtra("dir", f.toString());
-				i.putExtra("ServerAddress", cursor.getString(cursor.getColumnIndex("ServerAddress")));
-				i.putExtra("Type",cursor.getString(cursor.getColumnIndex("Type")));
-				i.putExtra("Username",cursor.getString(cursor.getColumnIndex("Username")));
-				i.putExtra("Password", cursor.getString(cursor.getColumnIndex("Password")));
-				startActivity(i);//Launch BrowseActivity pass Connection by Intent
+				Cursor cursor = db.query(TABLE_NAME, columns, "Label='"+label+"'", null,null,null,null);
+				if(cursor != null && cursor.moveToFirst()){
+					//prepare to launch activity
+					Intent i = new Intent(MainActivity.this, BrowseActivity.class);
+					i.putExtra("dir", f.toString());
+					i.putExtra("ServerAddress", cursor.getString(cursor.getColumnIndex("ServerAddress")));
+					i.putExtra("Type",cursor.getString(cursor.getColumnIndex("Type")));
+					i.putExtra("Username",cursor.getString(cursor.getColumnIndex("Username")));
+					i.putExtra("Password", cursor.getString(cursor.getColumnIndex("Password")));
+					startActivity(i);//Launch BrowseActivity pass Connection by Intent
+				}
 			}
         });
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
@@ -91,19 +97,29 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
     	super.onActivityResult(requestCode, resultCode, data);
-    	if(resultCode == RESULT_OK && requestCode == NEW_CONNECTION_ID){
+    	if(resultCode == RESULT_OK){
     		Bundle b = data.getExtras();
     		String label = b.getString("label");
     		String serverAddr = b.getString("serverAddr");
     		String type = b.getString("type");
     		String uname = b.getString("uname");
     		String password = b.getString("password");
-    		db.execSQL("INSERT INTO "+TABLE_NAME+" VALUES ('"+label+"','"+serverAddr+"','"
+    		switch(requestCode){
+    			case NEW_CONNECTION_ID:
+    				db.execSQL("INSERT INTO "+TABLE_NAME+" VALUES ('"+label+"','"+serverAddr+"','"
     				+type+"','"+uname+"','"+password+"');");
-    		adapter.add(label);
-    		adapter.notifyDataSetChanged();
+    				break;
+    			case EDIT_CONNECTION_ID:
+    				db.execSQL("UPDATE "+TABLE_NAME+" SET "+
+    						"ServerAddress="+serverAddr+
+    						",Type="+type+
+    						",Username="+uname+
+    						",Password="+password+"WHERE Label="+label+";");
+    				break;
+    			default: break;
+    			
+    		}
     	}
-    	
     }
 
     @Override

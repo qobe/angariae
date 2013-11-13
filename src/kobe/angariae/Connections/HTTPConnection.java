@@ -1,5 +1,6 @@
 package kobe.angariae.Connections;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class HTTPConnection implements Connection{
@@ -29,7 +30,7 @@ public class HTTPConnection implements Connection{
 	}
 
 	@Override
-	public LinkedList<String> browse(String path) {
+	public ArrayList<String> browse(String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}

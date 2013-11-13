@@ -20,6 +20,7 @@ public class AddConnectionActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					Intent i = getIntent();
+					i.putExtra("label", ((EditText) findViewById(R.id.editLabel)).getText().toString());
 					i.putExtra("serverAddr", ((EditText) findViewById(R.id.editServerAddress)).getText().toString());
 					i.putExtra("uname", ((EditText) findViewById(R.id.editUserName)).getText().toString());
 					i.putExtra("password", ((EditText) findViewById(R.id.editPassword)).getText().toString());

@@ -24,12 +24,13 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000f;
+        public static final int action_settings=0x7f080010;
+        public static final int browseListView=0x7f08000d;
+        public static final int editLabel=0x7f080001;
         public static final int editPassword=0x7f080007;
         public static final int editServerAddress=0x7f080003;
-        public static final int editText1=0x7f080001;
         public static final int editUserName=0x7f080005;
-        public static final int listView1=0x7f08000d;
+        public static final int listView1=0x7f08000f;
         public static final int new_connection=0x7f08000e;
         public static final int radioFTP=0x7f08000a;
         public static final int radioGroup1=0x7f080008;

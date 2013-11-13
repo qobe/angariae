@@ -1,5 +1,6 @@
 package kobe.angariae.Activities;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import kobe.angariae.AVPlayer;
@@ -20,12 +21,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class BrowseActivity extends ListActivity{
+public class BrowseActivity extends Activity{
 	private Connection conn;
 	private AVPlayer av;
 	private ListView listview;
 	private ArrayAdapter<String> adapter;
-	private LinkedList<String> dirList;
+	private ArrayList<String> dirList;
 	private Playlist playlist = new Playlist();
 	
 	@Override
@@ -35,7 +36,7 @@ public class BrowseActivity extends ListActivity{
         
         Bundle b = getIntent().getExtras();
         if(b.getString("Type").equalsIgnoreCase("HTTP/S")){
-        	conn = new HTTPConnection();
+        	conn = new FTPConnection();
         }else if(b.getString("Type").equalsIgnoreCase("FTP")){
         	conn = new FTPConnection();
         }
@@ -44,12 +45,18 @@ public class BrowseActivity extends ListActivity{
         
         try {
 			conn.connect(b.getString("ServerAddress"), b.getString("Username"), b.getString("Password"));
-			dirList = conn.browse(".");
+//			dirList = conn.browse(".");
+			dirList = new ArrayList<String>();
+			dirList.add("Hospital");
+			dirList.add("Flavor Flave");
+			dirList.add("Cell nononono");
+			dirList.add("Friday Mornin'");
+
 		} catch (AnException e) {
 			e.makeToast(BrowseActivity.this);
 		}
         
-        listview = (ListView)findViewById(R.id.listView1);
+        listview = (ListView)findViewById(R.id.browseListView);
         adapter = new ArrayAdapter<String>(BrowseActivity.this, android.R.layout.simple_list_item_1, dirList);
         listview.setAdapter(adapter);
         listview.setLongClickable(true);

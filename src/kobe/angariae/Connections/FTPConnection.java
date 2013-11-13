@@ -3,6 +3,7 @@ package kobe.angariae.Connections;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import kobe.angariae.exception.AnException;
@@ -56,8 +57,8 @@ public class FTPConnection implements Connection {
 	}
 	
 
-	public LinkedList<String> browse(String path) throws AnException{
-		LinkedList<String> dirContents = new LinkedList<String>();
+	public ArrayList<String> browse(String path) throws AnException{
+		ArrayList<String> dirContents = new ArrayList<String>();
 		try {
 			if(path == ".."){
 				ftpc.changeToParentDirectory();
