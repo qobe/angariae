@@ -13,11 +13,20 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
-public class FTPConnection implements Connection {
+import android.os.AsyncTask;
+
+public class FTPConnection extends AsyncTask implements Connection  {
 
 	private FTPClient ftpc;
 	private String downloadsDir;
 	
+	@Override
+	protected Object doInBackground(Object... params) {
+		//http://stackoverflow.com/questions/6343166/android-os-networkonmainthreadexception
+		//http://stackoverflow.com/questions/9671546/asynctask-android-example
+		return null;
+	}
+
 	public FTPConnection(){
 		ftpc = new FTPClient();
 		ftpc.setControlKeepAliveTimeout(420);//set timeout to 7 minutes
@@ -88,10 +97,5 @@ public class FTPConnection implements Connection {
 			throw new AnException("Error: Connection is closed.",e);
 		}
 		return downloadsDir+filename;
-	}
-	
-	
-	
-	
-	
+	}	
 }

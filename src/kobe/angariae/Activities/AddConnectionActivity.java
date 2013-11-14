@@ -1,5 +1,6 @@
 package kobe.angariae.Activities;
 
+import kobe.angariae.DatabaseHelper;
 import kobe.angariae.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,13 +21,13 @@ public class AddConnectionActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					Intent i = getIntent();
-					i.putExtra("label", ((EditText) findViewById(R.id.editLabel)).getText().toString());
-					i.putExtra("serverAddr", ((EditText) findViewById(R.id.editServerAddress)).getText().toString());
-					i.putExtra("uname", ((EditText) findViewById(R.id.editUserName)).getText().toString());
-					i.putExtra("password", ((EditText) findViewById(R.id.editPassword)).getText().toString());
+					i.putExtra(DatabaseHelper.LABEL, ((EditText) findViewById(R.id.editLabel)).getText().toString());
+					i.putExtra(DatabaseHelper.SERVER_ADDRESS, ((EditText) findViewById(R.id.editServerAddress)).getText().toString());
+					i.putExtra(DatabaseHelper.USER_NAME, ((EditText) findViewById(R.id.editUserName)).getText().toString());
+					i.putExtra(DatabaseHelper.PASSWORD, ((EditText) findViewById(R.id.editPassword)).getText().toString());
 					RadioGroup rGroup = (RadioGroup)findViewById(R.id.radioGroup1);
 					RadioButton selectedRB = (RadioButton)rGroup.findViewById(rGroup.getCheckedRadioButtonId());
-					i.putExtra("type", selectedRB.getText().toString());
+					i.putExtra(DatabaseHelper.TYPE, selectedRB.getText().toString());
 					setResult(RESULT_OK, i);
 					finish();
 				}

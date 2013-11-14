@@ -22,8 +22,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	
 	
-	private static String TABLE_NAME = "Connections";
-	private String[] columns = {"Label","ServerAddress","Type","Username","Password"};
 	private SQLiteDatabase db;
 	private static final int NEW_CONNECTION_ID = 69;
 	private static final int EDIT_CONNECTION_ID = 24;
@@ -54,10 +52,10 @@ public class MainActivity extends Activity {
 
         ListView listview = (ListView)findViewById(R.id.listView1);
         ArrayList<String> alist = new ArrayList<String>();
-        Cursor cursor = db.query(TABLE_NAME, columns, null, null, null, null, null);
+        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME, DatabaseHelper.FIELDS, null, null, null, null, null);
         if(cursor != null && cursor.moveToFirst()){
         	for(int i=0;i<cursor.getCount();i++){
-        		alist.add(cursor.getString(cursor.getColumnIndex(columns[0])));
+        		alist.add(cursor.getString(cursor.getColumnIndex(DatabaseHelper.LABEL)));
         		cursor.moveToNext();
         	}
         }
@@ -71,7 +69,7 @@ public class MainActivity extends Activity {
 				File f = new File(Environment.getExternalStorageDirectory()+File.separator+label);
 				f.mkdirs();
 				//extract connection data from table
-				Cursor cursor = db.query(TABLE_NAME, columns, "Label='"+label+"'", null,null,null,null);
+				Cursor cursor = db.query(DatabaseHelper.TABLE_NAME, DatabaseHelper.FIELDS, "Label='"+label+"'", null,null,null,null);
 				if(cursor != null && cursor.moveToFirst()){
 					//prepare to launch activity
 					Intent i = new Intent(MainActivity.this, BrowseActivity.class);
@@ -99,18 +97,18 @@ public class MainActivity extends Activity {
     	super.onActivityResult(requestCode, resultCode, data);
     	if(resultCode == RESULT_OK){
     		Bundle b = data.getExtras();
-    		String label = b.getString("label");
-    		String serverAddr = b.getString("serverAddr");
-    		String type = b.getString("type");
-    		String uname = b.getString("uname");
-    		String password = b.getString("password");
+    		String label = b.getString(DatabaseHelper.LABEL);
+    		String serverAddr = b.getString(DatabaseHelper.SERVER_ADDRESS);
+    		String type = b.getString(DatabaseHelper.TYPE);
+    		String uname = b.getString(DatabaseHelper.USER_NAME);
+    		String password = b.getString(DatabaseHelper.PASSWORD);
     		switch(requestCode){
     			case NEW_CONNECTION_ID:
-    				db.execSQL("INSERT INTO "+TABLE_NAME+" VALUES ('"+label+"','"+serverAddr+"','"
+    				db.execSQL("INSERT INTO "+DatabaseHelper.TABLE_NAME+" VALUES ('"+label+"','"+serverAddr+"','"
     				+type+"','"+uname+"','"+password+"');");
     				break;
     			case EDIT_CONNECTION_ID:
-    				db.execSQL("UPDATE "+TABLE_NAME+" SET "+
+    				db.execSQL("UPDATE "+DatabaseHelper.TABLE_NAME+" SET "+
     						"ServerAddress="+serverAddr+
     						",Type="+type+
     						",Username="+uname+
