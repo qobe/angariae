@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import kobe.angariae.AVPlayer;
+import kobe.angariae.DatabaseHelper;
 import kobe.angariae.Playlist;
 import kobe.angariae.R;
 import kobe.angariae.Connections.*;
@@ -35,27 +36,33 @@ public class BrowseActivity extends Activity{
         setContentView(R.layout.activity_browse);
         
         Bundle b = getIntent().getExtras();
-        if(b.getString("Type").equalsIgnoreCase("HTTP/S")){
-        	conn = new FTPConnection();
-        }else if(b.getString("Type").equalsIgnoreCase("FTP")){
-        	conn = new FTPConnection();
-        }
-        conn.setDownloads(b.getString("dir"));
+//        if(b.getString("Type").equalsIgnoreCase("HTTP/S")){
+//        	conn = new HTTPConnection();
+//        }else if(b.getString("Type").equalsIgnoreCase("FTP")){
+//        	conn = new FTPConnection();
+//        }
+        conn = new FTPConnection();
+        
+        final String serverAdd = b.getString(DatabaseHelper.SERVER_ADDRESS);
+        final String uname = b.getString(DatabaseHelper.USER_NAME);
+        final String passwd = b.getString(DatabaseHelper.PASSWORD);
+        conn.setDownloads(b.getString("dir"));       		
         av = new AVPlayer();
         
-        try {
-			conn.connect(b.getString("ServerAddress"), b.getString("Username"), b.getString("Password"));
-//			dirList = conn.browse(".");
-			dirList = new ArrayList<String>();
-			dirList.add("Hospital");
-			dirList.add("Flavor Flave");
-			dirList.add("Cell nononono");
-			dirList.add("Friday Mornin'");
-
-		} catch (AnException e) {
-			e.makeToast(BrowseActivity.this);
-		}
         
+        new Thread(new Runnable(){
+        	public void run(){
+        		Bundle b = getIntent().getExtras();
+        		try {
+					conn.connect(serverAdd, uname, passwd);
+//					dirList = conn.browse(".");
+				} catch (AnException e) {
+					e.makeToast(BrowseActivity.this);
+				}
+        	}
+        }).start();
+        dirList = new ArrayList<String>();
+
         listview = (ListView)findViewById(R.id.browseListView);
         adapter = new ArrayAdapter<String>(BrowseActivity.this, android.R.layout.simple_list_item_1, dirList);
         listview.setAdapter(adapter);

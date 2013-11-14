@@ -15,18 +15,11 @@ import org.apache.commons.net.ftp.FTPReply;
 
 import android.os.AsyncTask;
 
-public class FTPConnection extends AsyncTask implements Connection  {
+public class FTPConnection implements Connection  {
 
 	private FTPClient ftpc;
 	private String downloadsDir;
 	
-	@Override
-	protected Object doInBackground(Object... params) {
-		//http://stackoverflow.com/questions/6343166/android-os-networkonmainthreadexception
-		//http://stackoverflow.com/questions/9671546/asynctask-android-example
-		return null;
-	}
-
 	public FTPConnection(){
 		ftpc = new FTPClient();
 		ftpc.setControlKeepAliveTimeout(420);//set timeout to 7 minutes
