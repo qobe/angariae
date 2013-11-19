@@ -10,22 +10,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class AddConnectionActivity extends Activity {
 	@Override
 	 protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.activity_add_connection);
-	        Button submit = (Button)findViewById(R.id.submit_button);
-	        submit.setOnClickListener(new View.OnClickListener(){
+	        Button submitButton = (Button)findViewById(R.id.submit_button);
+	        final EditText editLabel = ((EditText)findViewById(R.id.editLabel));
+	        final EditText editServerAddress = ((EditText)findViewById(R.id.editServerAddress));
+	        final EditText editUserName = ((EditText)findViewById(R.id.editUserName));
+	        final EditText editPassword = ((EditText)findViewById(R.id.editPassword));
+	        final RadioGroup rGroup = (RadioGroup)findViewById(R.id.radioGroup1);
+	        final Intent i = getIntent();
+	        Bundle b = i.getExtras();
+	        if(i.getAction().equals(MainActivity.CUSTOM_ACTION_EDIT)){
+	        	editLabel.setText(b.getString(DatabaseHelper.LABEL), TextView.BufferType.EDITABLE);
+	        	editServerAddress.setText(b.getString(DatabaseHelper.SERVER_ADDRESS), TextView.BufferType.EDITABLE);
+	        	editUserName.setText(b.getString(DatabaseHelper.USER_NAME), TextView.BufferType.EDITABLE);
+	        	editPassword.setText(b.getString(DatabaseHelper.PASSWORD), TextView.BufferType.EDITABLE);
+	        	rGroup.check(Integer.parseInt(b.getString(DatabaseHelper.TYPE)));
+	        }
+	        submitButton.setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View v) {
-					Intent i = getIntent();
-					i.putExtra(DatabaseHelper.LABEL, ((EditText) findViewById(R.id.editLabel)).getText().toString());
-					i.putExtra(DatabaseHelper.SERVER_ADDRESS, ((EditText) findViewById(R.id.editServerAddress)).getText().toString());
-					i.putExtra(DatabaseHelper.USER_NAME, ((EditText) findViewById(R.id.editUserName)).getText().toString());
-					i.putExtra(DatabaseHelper.PASSWORD, ((EditText) findViewById(R.id.editPassword)).getText().toString());
-					RadioGroup rGroup = (RadioGroup)findViewById(R.id.radioGroup1);
+					i.putExtra(DatabaseHelper.LABEL, editLabel.getText().toString());
+					i.putExtra(DatabaseHelper.SERVER_ADDRESS,editServerAddress.getText().toString());
+					i.putExtra(DatabaseHelper.USER_NAME,editUserName.getText().toString());
+					i.putExtra(DatabaseHelper.PASSWORD,editPassword.getText().toString());
 					RadioButton selectedRB = (RadioButton)rGroup.findViewById(rGroup.getCheckedRadioButtonId());
 					i.putExtra(DatabaseHelper.TYPE, selectedRB.getText().toString());
 					setResult(RESULT_OK, i);

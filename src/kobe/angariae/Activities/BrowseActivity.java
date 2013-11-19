@@ -36,9 +36,9 @@ public class BrowseActivity extends Activity{
         setContentView(R.layout.activity_browse);
         
         Bundle b = getIntent().getExtras();
-//        if(b.getString("Type").equalsIgnoreCase("HTTP/S")){
+//        if(b.getString("Type").contains("HTTP"){
 //        	conn = new HTTPConnection();
-//        }else if(b.getString("Type").equalsIgnoreCase("FTP")){
+//        }else if(b.getString("Type").contains("FTP")){
 //        	conn = new FTPConnection();
 //        }
         conn = new FTPConnection();
@@ -54,7 +54,7 @@ public class BrowseActivity extends Activity{
         	public void run(){
         		Bundle b = getIntent().getExtras();
         		try {
-					conn.connect(serverAdd, uname, passwd);
+					conn.connect();
 //					dirList = conn.browse(".");
 				} catch (AnException e) {
 					e.makeToast(BrowseActivity.this);
@@ -125,6 +125,7 @@ public class BrowseActivity extends Activity{
 			} catch (AnException e) {
 				e.makeToast(BrowseActivity.this);
 			}
+    		break;
     	}
 		return true;
     }

@@ -18,12 +18,14 @@
         android:text="@string/new_connection_label" />
 
     <ListView
-        android:id="@+id/listView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/new_connection"
-        android:layout_below="@+id/new_connection" >
-
-    </ListView>
+        android:id="@+id/android:list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    
+    <TextView
+        android:id="@+id/android:empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="No items to display." />
 
 </RelativeLayout>
