@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="kobe.angariae.Activities.MainActivity"
+            android:name="kobe.angariae.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,17 +23,17 @@
         </activity>
         
         <activity
-            android:name="kobe.angariae.Activities.AddConnectionActivity"
+            android:name="kokobe.angariae.activity.AddConnectionActivity"            
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="kobe.angariae.Activities.ACTION_EDIT_CONNECTION" />
                 <action android:name="kobe.angariae.Activities.ACTION_NEW_CONNECTION" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="kobe.angariae.Activities.BrowseActivity"
+            android:name="kobekobe.angariae.activity.BrowseActivity"
             android:label="@string/app_name" />
+
     </application>
 
 </manifest>

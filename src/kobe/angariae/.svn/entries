@@ -60,20 +60,6 @@ has-props
 
 758
 
-Activities
-dir
-
-
-
-add
-
-Connections
-dir
-
-
-
-add
-
 FTPWrapper.java
 file
 7
@@ -165,6 +151,20 @@ file
 
 
 deleted
+
+activity
+dir
+
+
+
+add
+
+connection
+dir
+
+
+
+add
 
 exception
 dir
