@@ -29,8 +29,8 @@ public class MainActivity extends ListActivity {
 	private SQLiteDatabase db;
 	private static final int NEW_CONNECTION_ID = 69;
 	private static final int EDIT_CONNECTION_ID = 24;
-	public static final String CUSTOM_ACTION_EDIT = "kobe.angariae.Activities.ACTION_EDIT_CONNECTION";
-	public static final String CUSTOM_ACTION_NEW = "kobe.angariae.Activities.ACTION_NEW_CONNECTION";
+	public static final String CUSTOM_ACTION_EDIT = "kobe.angariae.activity.ACTION_EDIT_CONNECTION";
+	public static final String CUSTOM_ACTION_NEW = "kobe.angariae.activity.ACTION_NEW_CONNECTION";
 	private ArrayList<Connection> Connections;
 	
 	private void toast(String msg){
@@ -58,10 +58,11 @@ public class MainActivity extends ListActivity {
 
         Connections = new ArrayList<Connection>();
         ConnectionAdapter ca = new ConnectionAdapter(MainActivity.this,R.layout.list_connection, Connections);
-        ca.setNotifyOnChange(true);
+//        ca.setNotifyOnChange(true);
         setListAdapter(ca);
         registerForContextMenu(getListView());
-//        onContentChanged();
+        onContentChanged();
+        
         
         Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,DatabaseHelper.FIELDS, null, null, null, null, null);
         if(cursor != null && cursor.moveToFirst()){
@@ -132,8 +133,8 @@ public class MainActivity extends ListActivity {
     	super.onCreateContextMenu(menu, v, menuInfo);
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
     	menu.setHeaderTitle(Connections.get(info.position).getLabel());
-    	menu.add(0, 1, 0, "Edit connection...");
-    	menu.add(0, 2, 1, "Delete connection...");
+    	menu.add(0, 1, 0, "Edit connection");
+    	menu.add(0, 2, 1, "Delete connection");
     }
     
     @Override

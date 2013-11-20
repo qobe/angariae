@@ -21,6 +21,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class BrowseActivity extends Activity{
 	private Connection conn;
@@ -28,7 +29,6 @@ public class BrowseActivity extends Activity{
 	private ListView listview;
 	private ArrayAdapter<String> adapter;
 	private ArrayList<String> dirList;
-	private Playlist playlist = new Playlist();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class BrowseActivity extends Activity{
         listview.setLongClickable(true);
         registerForContextMenu(listview);
         
-        Button upDir = (Button)findViewById(R.id.up_directory);
+        TextView upDir = (TextView)findViewById(R.id.up_directory);
         upDir.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -91,7 +91,7 @@ public class BrowseActivity extends Activity{
     public void onCreateContextMenu(ContextMenu m, View v, ContextMenuInfo mi){
     	super.onCreateContextMenu(m, v, mi);
         AdapterContextMenuInfo info = (AdapterContextMenuInfo)mi;
-        m.add(0, 1, 0, "Add to playlist...");
+        m.add(0, 1, 0, "Add to playlist");
     }
     
     @Override
@@ -99,12 +99,7 @@ public class BrowseActivity extends Activity{
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
     	switch (item.getItemId()) {
     	case 1:
-    		//add item selected to playlist
-    		try {
-				playlist.enqueue(conn.download(dirList.get(info.position)));
-			} catch (AnException e) {
-				e.makeToast(BrowseActivity.this);
-			}
+
     		break;
     	}
 		return true;

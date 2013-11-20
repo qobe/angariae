@@ -12,6 +12,7 @@
         android:ellipsize="marquee"
         android:singleLine="true"
         android:textStyle="bold" 
+        android:textSize="20sp"
         />
 
     <TextView

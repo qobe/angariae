@@ -9,13 +9,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BrowseActivity" >
 
-    <Button
+    <TextView
         android:id="@+id/up_directory"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="@string/up_directory" />
+        android:text="@string/up_directory"
+        android:textSize="36sp" />
 
     <ListView
         android:id="@+id/browseListView"
