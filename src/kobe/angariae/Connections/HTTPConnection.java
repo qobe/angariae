@@ -82,17 +82,4 @@ public class HTTPConnection implements Connection{
 	public String getType() {
 		return this.type ;
 	}
-
-	@Override
-	public int describeContents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
-		
-	}	
-
 }

@@ -7,7 +7,7 @@ import android.os.Parcelable;
 
 import kobe.angariae.exception.AnException;
 
-public interface Connection extends Parcelable{
+public interface Connection{
 	String getServerAddress();
 	String getUserName();
 	String getPassword();

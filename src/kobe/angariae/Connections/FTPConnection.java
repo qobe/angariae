@@ -93,61 +93,40 @@ public class FTPConnection implements Connection  {
 		}
 		return downloadsDir+filename;
 	}
-
 	@Override
 	public String getServerAddress() {
 		return serverAddress;
 	}
-
 	@Override
 	public String getUserName() {
 		return username;
 	}
-
 	@Override
 	public String getPassword() {
 		return password;
 	}
-
 	@Override
 	public String getLabel() {
 		return label;
 	}
-
 	@Override
 	public void setServerAddress(String sa) {
 		this.serverAddress = sa;
 	}
-
 	@Override
 	public void setUserName(String un) {
 		this.username = un;
 	}
-
 	@Override
 	public void setPassword(String p) {
 		this.password = p;
 	}
-
 	@Override
 	public void setLabel(String l) {
 		this.label = l;
 	}
-
 	@Override
 	public String getType() {
 		return this.type;
 	}
-
-	@Override
-	public int describeContents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
-	}	
 }
