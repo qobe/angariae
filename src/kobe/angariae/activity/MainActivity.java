@@ -19,7 +19,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -57,8 +56,13 @@ public class MainActivity extends ListActivity {
 			}
         });
 
-        
         Connections = new ArrayList<Connection>();
+        ConnectionAdapter ca = new ConnectionAdapter(MainActivity.this,R.layout.list_connection, Connections);
+        ca.setNotifyOnChange(true);
+        setListAdapter(ca);
+        registerForContextMenu(getListView());
+//        onContentChanged();
+        
         Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,DatabaseHelper.FIELDS, null, null, null, null, null);
         if(cursor != null && cursor.moveToFirst()){
         	Connection c;
@@ -72,6 +76,7 @@ public class MainActivity extends ListActivity {
         		c.setServerAddress(cursor.getString(cursor.getColumnIndex(DatabaseHelper.SERVER_ADDRESS)));
         		c.setUserName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_NAME)));
         		c.setPassword(cursor.getString(cursor.getColumnIndex(DatabaseHelper.PASSWORD)));
+        		Connections.add(c);
         		cursor.moveToNext();
         	}
         }
@@ -80,37 +85,22 @@ public class MainActivity extends ListActivity {
         b.setOnClickListener(new View.OnClickListener() {
         	@Override
         	public void onClick(View v) {
+        		String t = " ";
         		for(int i=0;i<Connections.size();i++){       			
-        			toast(Connections.get(i).getLabel());
+        			t += Connections.get(i).getLabel();
         		}
+        		toast(t);
         	}
         });
         //end bottom button
-        
-        ConnectionAdapter adapter = new ConnectionAdapter(MainActivity.this,
-        		R.layout.list_connection, Connections);
-        adapter.setNotifyOnChange(true);
-        ListView listview = getListView();
-        listview.setAdapter(adapter);
-//        setListAdapter(adapter);
-        registerForContextMenu(listview);
-        listview.setTextFilterEnabled(true);
-        
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-				ParcelableConnection pc = new ParcelableConnection(Connections.get(position));
-				Intent i = new Intent(MainActivity.this, BrowseActivity.class);
-				i.putExtra(Connection.klass, pc);
-				startActivity(i);//Launch BrowseActivity pass Connection by Intent
-			}
-        });
-        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position,long id){
-				return false;
-			}
-		});
+      }
+    
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id){
+		ParcelableConnection pc = new ParcelableConnection(Connections.get(position));
+		Intent i = new Intent(MainActivity.this, BrowseActivity.class);
+		i.putExtra(Connection.klass, pc);
+		startActivity(i);//Launch BrowseActivity pass Connection by Intent
     }
     
     @Override
@@ -159,8 +149,10 @@ public class MainActivity extends ListActivity {
 			startActivityForResult(i, EDIT_CONNECTION_ID);
 			break;
     	case 2://delete connection: remove from DB
-    		db.execSQL(String.format("DELETE FROM %s WHERE %s='%s';",
-    				DatabaseHelper.TABLE_NAME, DatabaseHelper.LABEL, c.getLabel()));
+    		db.execSQL(String.format("DELETE FROM %s WHERE %s='%s' AND %s='%s' AND %s='%s';",
+    				DatabaseHelper.TABLE_NAME, DatabaseHelper.LABEL, c.getLabel(),
+    				DatabaseHelper.SERVER_ADDRESS, c.getServerAddress(),
+    				DatabaseHelper.TYPE, c.getType()));
     		Connections.remove(info.position);
     		break;
     	}

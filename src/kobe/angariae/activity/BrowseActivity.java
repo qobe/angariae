@@ -34,18 +34,7 @@ public class BrowseActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
-        
-        Bundle b = getIntent().getExtras();
-        if(b.getString(DatabaseHelper.TYPE).contains("HTTP")){
-        	conn = new HTTPConnection();
-        }else {
-        	conn = new FTPConnection();
-        }
-        
-        final String serverAdd = b.getString(DatabaseHelper.SERVER_ADDRESS);
-        final String uname = b.getString(DatabaseHelper.USER_NAME);
-        final String passwd = b.getString(DatabaseHelper.PASSWORD);
-        conn.setDownloads();       		
+
         av = new AVPlayer();
         
         
@@ -95,15 +84,7 @@ public class BrowseActivity extends Activity{
 //				else av.play(item); //stream from server?
 //				if(item.matches("*.(3gp)|(mp4)|(m4a)|(aac)|(3gp)|(flac)|(mp3)|(wav)|(mid)|(xmf)|(mxmf)|(rtttl)|(rtx)|(ogg)|(mkv)|(ota)|(imy)"))
 			}
-        });
-        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position,long id){
-//				Context menu: 1.Add to playlist?
-				return false;
-			}
-		});
-        
+        });       
 	}
 	
     @Override
