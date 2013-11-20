@@ -12,12 +12,15 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
+import android.os.Parcel;
+
 
 public class FTPConnection implements Connection  {
 
 	private FTPClient ftpc;
 	private String downloadsDir;
 	private String serverAddress, username, password, label;
+	private String type = "FTP";
 	
 	public FTPConnection(){
 		ftpc = new FTPClient();
@@ -129,5 +132,22 @@ public class FTPConnection implements Connection  {
 	@Override
 	public void setLabel(String l) {
 		this.label = l;
+	}
+
+	@Override
+	public String getType() {
+		return this.type;
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
 	}	
 }

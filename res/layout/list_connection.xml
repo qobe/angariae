@@ -11,15 +11,26 @@
         android:layout_alignParentTop="true"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:textStyle="bold" />
+        android:textStyle="bold" 
+        />
 
     <TextView
-        android:id="@+id/bottomtext"
+        android:id="@+id/midtext"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/toptext"
         android:ellipsize="marquee"
-        android:singleLine="true"/>
+        android:singleLine="true" />
+    
+    <TextView
+        android:id="@+id/bottomtext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/midtext"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        />
 
 </RelativeLayout>

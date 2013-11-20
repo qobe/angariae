@@ -20,12 +20,14 @@
     <ListView
         android:id="@+id/android:list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent" 
+        android:layout_below="@+id/new_connection"
+        />
     
-    <TextView
+    <!--TextView
         android:id="@+id/android:empty"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:text="No items to display." />
+        android:text="No items to display." /-->
 
 </RelativeLayout>

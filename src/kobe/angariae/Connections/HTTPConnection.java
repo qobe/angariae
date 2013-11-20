@@ -3,8 +3,11 @@ package kobe.angariae.Connections;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import android.os.Parcel;
+
 public class HTTPConnection implements Connection{
 	private String serverAddress, username, password, label;
+	private String type = "HTTP/S";
 	@Override
 	public void connect() {
 		// TODO Auto-generated method stub
@@ -73,6 +76,23 @@ public class HTTPConnection implements Connection{
 	@Override
 	public void setLabel(String l) {
 		this.label = l;
+	}
+
+	@Override
+	public String getType() {
+		return this.type ;
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
 	}	
 
 }

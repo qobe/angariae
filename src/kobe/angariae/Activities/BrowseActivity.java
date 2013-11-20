@@ -36,12 +36,11 @@ public class BrowseActivity extends Activity{
         setContentView(R.layout.activity_browse);
         
         Bundle b = getIntent().getExtras();
-//        if(b.getString("Type").contains("HTTP"){
-//        	conn = new HTTPConnection();
-//        }else if(b.getString("Type").contains("FTP")){
-//        	conn = new FTPConnection();
-//        }
-        conn = new FTPConnection();
+        if(b.getString(DatabaseHelper.TYPE).contains("HTTP")){
+        	conn = new HTTPConnection();
+        }else {
+        	conn = new FTPConnection();
+        }
         
         final String serverAdd = b.getString(DatabaseHelper.SERVER_ADDRESS);
         final String uname = b.getString(DatabaseHelper.USER_NAME);

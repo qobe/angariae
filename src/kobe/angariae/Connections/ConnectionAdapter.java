@@ -32,11 +32,15 @@ public class ConnectionAdapter extends ArrayAdapter<Connection>{
 		if(c != null){
 			TextView tt = (TextView)v.findViewById(R.id.toptext);
 			TextView bt = (TextView)v.findViewById(R.id.bottomtext);
+			TextView mt = (TextView)v.findViewById(R.id.midtext);
 			if(tt != null){
 				tt.setText(c.getLabel());
 			}
 			if(bt != null){
 				bt.setText(c.getServerAddress());
+			}
+			if(tt != null){
+				mt.setText(c.getType());
 			}
 		}
 		return v;
