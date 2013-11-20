@@ -23,7 +23,7 @@
         </activity>
         
         <activity
-            android:name="kokobe.angariae.activity.AddConnectionActivity"            
+            android:name="kobe.angariae.activity.AddConnectionActivity"            
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="kobe.angariae.Activities.ACTION_EDIT_CONNECTION" />
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="kobekobe.angariae.activity.BrowseActivity"
+            android:name="kobe.angariae.activity.BrowseActivity"
             android:label="@string/app_name" />
 
     </application>

@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ListActivity {
@@ -48,8 +49,8 @@ public class MainActivity extends ListActivity {
 	    DatabaseHelper dHelper = new DatabaseHelper(MainActivity.this);
 	    db = dHelper.getWritableDatabase();
         
-        Button b = (Button)findViewById(R.id.new_connection);
-        b.setOnClickListener(new View.OnClickListener(){
+        TextView a = (TextView)findViewById(R.id.new_connection);
+        a.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, AddConnectionActivity.class);
@@ -58,6 +59,14 @@ public class MainActivity extends ListActivity {
 			}
         });
 
+        TextView b = (TextView)findViewById(R.id.local_connection);
+        b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				toast("Not yet implemented");
+			}
+		});
+        
         Connections = new ArrayList<Connection>();
         Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,DatabaseHelper.FIELDS, null, null, null, null, null);
         if(cursor != null && cursor.moveToFirst()){
@@ -75,7 +84,8 @@ public class MainActivity extends ListActivity {
         		cursor.moveToNext();
         	}
         }
-        ConnectionAdapter adapter = new ConnectionAdapter(MainActivity.this,android.R.layout.simple_list_item_1, Connections);
+        ConnectionAdapter adapter = new ConnectionAdapter(MainActivity.this,
+        		R.layout.activity_main, Connections);
         adapter.setNotifyOnChange(true);
         ListView listview = getListView();
         setListAdapter(adapter);

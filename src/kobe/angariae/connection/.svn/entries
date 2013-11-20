@@ -26,26 +26,38 @@ svn:special svn:externals svn:needs-lock
 
 6a18e0a6-bf43-af26-c525-97830470b14d
 
-FTPConnection.java
+Connection.java
 file
-4
+
 
 
 add
+
+ConnectionAdapter.java
+file
 
 
 
-
-
-has-props
-has-prop-mods
-
-
-
+add
+
+FTPConnection.java
+file
 
 
 
-copied
-https://file-stream-client.googlecode.com/svn/angariae/src/kobe/angariae/FTPWrapper.java
-7
+add
+
+HTTPConnection.java
+file
+
+
+
+add
+
+ParcelableConnection.java
+file
+
+
+
+add
 
