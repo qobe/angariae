@@ -21,13 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ListActivity {
-	
 	
 	private SQLiteDatabase db;
 	private static final int NEW_CONNECTION_ID = 69;
@@ -59,13 +57,6 @@ public class MainActivity extends ListActivity {
 			}
         });
 
-        TextView b = (TextView)findViewById(R.id.local_connection);
-        b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				toast("Not yet implemented");
-			}
-		});
         
         Connections = new ArrayList<Connection>();
         Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,DatabaseHelper.FIELDS, null, null, null, null, null);
@@ -84,11 +75,24 @@ public class MainActivity extends ListActivity {
         		cursor.moveToNext();
         	}
         }
+        //bottom button
+        TextView b = (TextView)findViewById(R.id.local_connection);
+        b.setOnClickListener(new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		for(int i=0;i<Connections.size();i++){       			
+        			toast(Connections.get(i).getLabel());
+        		}
+        	}
+        });
+        //end bottom button
+        
         ConnectionAdapter adapter = new ConnectionAdapter(MainActivity.this,
-        		R.layout.activity_main, Connections);
+        		R.layout.list_connection, Connections);
         adapter.setNotifyOnChange(true);
         ListView listview = getListView();
-        setListAdapter(adapter);
+        listview.setAdapter(adapter);
+//        setListAdapter(adapter);
         registerForContextMenu(listview);
         listview.setTextFilterEnabled(true);
         
@@ -108,7 +112,7 @@ public class MainActivity extends ListActivity {
 			}
 		});
     }
- 
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
     	super.onActivityResult(requestCode, resultCode, data);

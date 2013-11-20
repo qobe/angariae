@@ -3,8 +3,6 @@ package kobe.angariae.connection;
 import java.util.ArrayList;
 
 import kobe.angariae.R;
-import kobe.angariae.R.id;
-import kobe.angariae.R.layout;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +18,7 @@ public class ConnectionAdapter extends ArrayAdapter<Connection>{
 		this.objects = objects;
 	}
 	
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
 		View v = convertView;
 		
