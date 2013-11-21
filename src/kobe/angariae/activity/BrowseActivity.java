@@ -9,8 +9,10 @@ import kobe.angariae.R;
 import kobe.angariae.connection.Connection;
 import kobe.angariae.connection.FTPConnection;
 import kobe.angariae.connection.HTTPConnection;
+import kobe.angariae.connection.ParcelableConnection;
 import kobe.angariae.exception.AnException;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -24,7 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class BrowseActivity extends Activity{
-	private Connection conn;
+	private Connection c;
 	private AVPlayer av;
 	private ListView listview;
 	private ArrayAdapter<String> adapter;
@@ -35,6 +37,9 @@ public class BrowseActivity extends Activity{
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
 
+        Intent i = getIntent();
+        ParcelableConnection pc = (ParcelableConnection)i.getParcelableExtra(Connection.klass);
+        c = pc.getConnection();
         av = new AVPlayer();
         
         
@@ -42,7 +47,7 @@ public class BrowseActivity extends Activity{
         	public void run(){
         		Bundle b = getIntent().getExtras();
         		try {
-					conn.connect();
+					c.connect();
 //					dirList = conn.browse(".");
 				} catch (AnException e) {
 					e.makeToast(BrowseActivity.this);
@@ -62,7 +67,7 @@ public class BrowseActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				try {
-					dirList = conn.browse("..");
+					dirList = c.browse("..");
 				} catch (AnException e) {
 					e.makeToast(BrowseActivity.this);
 				}
@@ -76,7 +81,7 @@ public class BrowseActivity extends Activity{
 				String item = (String)parent.getItemAtPosition(position);
 				if(!item.matches("*.*")){
 					try {
-						conn.browse(item);
+						c.browse(item);
 					} catch (AnException e) {
 						e.makeToast(BrowseActivity.this);
 					}

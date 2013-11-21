@@ -61,7 +61,7 @@ public class MainActivity extends ListActivity {
 //        ca.setNotifyOnChange(true);
         setListAdapter(ca);
         registerForContextMenu(getListView());
-        onContentChanged();
+//        onContentChanged();
         
         
         Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,DatabaseHelper.FIELDS, null, null, null, null, null);
@@ -111,6 +111,7 @@ public class MainActivity extends ListActivity {
     		ParcelableConnection pc = (ParcelableConnection)data.getParcelableExtra(Connection.klass);
     		Connection c = pc.getConnection();
     		Connections.add(c);
+    		((ConnectionAdapter)getListAdapter()).notifyDataSetChanged();
     		switch(requestCode){
     			case NEW_CONNECTION_ID:
     				db.execSQL(String.format("INSERT INTO %s VALUES ('%s','%s','%s','%s','%s');",
@@ -155,6 +156,7 @@ public class MainActivity extends ListActivity {
     				DatabaseHelper.SERVER_ADDRESS, c.getServerAddress(),
     				DatabaseHelper.TYPE, c.getType()));
     		Connections.remove(info.position);
+    		((ConnectionAdapter)getListAdapter()).notifyDataSetChanged();
     		break;
     	}
 		return true;
