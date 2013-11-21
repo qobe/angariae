@@ -8,19 +8,20 @@ import android.os.Parcelable;
 import kobe.angariae.exception.AnException;
 
 public interface Connection{
-	public static final String klass = "connection";
-	public String getServerAddress();
-	public String getUserName();
-	public String getPassword();
-	public String getLabel();
-	public String getType();
-	public void setServerAddress(String sa);
-	public void setUserName(String un);
-	public void setPassword(String p);
-	public void setLabel(String l);
-	public void connect() throws AnException;
-	public void disconnect() throws AnException;
-	public String download(String file) throws AnException;
-	public void setDownloads();
-	public ArrayList<String> browse(String path) throws AnException;
+    public static final String klass = "connection";
+    public String getServerAddress();
+    public String getUserName();
+    public String getPassword();
+    public String getLabel();
+    public String getType();
+    public void setServerAddress(String sa);
+    public void setUserName(String un);
+    public void setPassword(String p);
+    public void setLabel(String l);
+    public void connect() throws AnException;
+    public void disconnect() throws AnException;
+    public String download(String file) throws AnException;
+    public ArrayList<String> browse(String path) throws AnException;
+    public ArrayList<String> browsePWD()throws AnException;
+    public ArrayList<String> browseUp()throws AnException;
 }

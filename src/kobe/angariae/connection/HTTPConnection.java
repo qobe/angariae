@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import kobe.angariae.exception.AnException;
+
 import android.os.Environment;
 import android.os.Parcel;
 
@@ -38,7 +40,6 @@ public class HTTPConnection implements Connection{
 		return null;
 	}
 
-	@Override
 	public void setDownloads() {
 		File f = new File(Environment.getExternalStorageDirectory()+File.separator+label+File.separator);
 		f.mkdirs();
@@ -93,5 +94,17 @@ public class HTTPConnection implements Connection{
 	@Override
 	public String getType() {
 		return this.type ;
+	}
+
+	@Override
+	public ArrayList<String> browseUp() throws AnException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> browsePWD() throws AnException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

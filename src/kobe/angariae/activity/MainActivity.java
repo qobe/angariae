@@ -8,6 +8,7 @@ import kobe.angariae.connection.Connection;
 import kobe.angariae.connection.ConnectionAdapter;
 import kobe.angariae.connection.FTPConnection;
 import kobe.angariae.connection.HTTPConnection;
+import kobe.angariae.connection.LocalConnection;
 import kobe.angariae.connection.ParcelableConnection;
 import android.os.Bundle;
 import android.app.ListActivity;
@@ -81,19 +82,17 @@ public class MainActivity extends ListActivity {
         		cursor.moveToNext();
         	}
         }
-        //bottom button
+        //local music only
         TextView b = (TextView)findViewById(R.id.local_connection);
         b.setOnClickListener(new View.OnClickListener() {
         	@Override
         	public void onClick(View v) {
-        		String t = " ";
-        		for(int i=0;i<Connections.size();i++){       			
-        			t += Connections.get(i).getLabel();
-        		}
-        		toast(t);
+        		ParcelableConnection pc = new ParcelableConnection(new LocalConnection());
+        		Intent i = new Intent(MainActivity.this, BrowseActivity.class);
+        		i.putExtra(Connection.klass,pc);
+        		startActivity(i);
         	}
         });
-        //end bottom button
       }
     
     @Override

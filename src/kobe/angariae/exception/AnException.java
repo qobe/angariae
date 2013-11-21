@@ -1,5 +1,6 @@
 package kobe.angariae.exception;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -20,4 +21,7 @@ public class AnException extends Exception{
 		Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
 		toast.show();
 	}
+//	public void display(Context context){
+//		AlertDialog ad = new AlertDialog(context);
+//	}
 }

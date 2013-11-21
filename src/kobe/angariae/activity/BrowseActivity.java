@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 public class BrowseActivity extends Activity{
 	private Connection c;
-	private AVPlayer av;
 	private ListView listview;
 	private ArrayAdapter<String> adapter;
 	private ArrayList<String> dirList;
@@ -40,21 +39,15 @@ public class BrowseActivity extends Activity{
         Intent i = getIntent();
         ParcelableConnection pc = (ParcelableConnection)i.getParcelableExtra(Connection.klass);
         c = pc.getConnection();
-        av = new AVPlayer();
-        
-        
-        new Thread(new Runnable(){
-        	public void run(){
-        		Bundle b = getIntent().getExtras();
-        		try {
-					c.connect();
-//					dirList = conn.browse(".");
-				} catch (AnException e) {
-					e.makeToast(BrowseActivity.this);
-				}
-        	}
-        }).start();
         dirList = new ArrayList<String>();
+        try {
+			c.connect();
+			dirList = c.browsePWD();
+		} catch (AnException e) {
+			e.makeToast(this);
+		}
+        
+        
 
         listview = (ListView)findViewById(R.id.browseListView);
         adapter = new ArrayAdapter<String>(BrowseActivity.this, android.R.layout.simple_list_item_1, dirList);
@@ -67,7 +60,7 @@ public class BrowseActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				try {
-					dirList = c.browse("..");
+					dirList = c.browseUp();
 				} catch (AnException e) {
 					e.makeToast(BrowseActivity.this);
 				}

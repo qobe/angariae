@@ -19,8 +19,10 @@ public class ParcelableConnection implements Parcelable{
 		String tmp = in.readString(); //extract "Type"
 		if(tmp.contains("FTP")){
 			c = new FTPConnection();
-		}else{
+		}else if(tmp.contains("HTTP")){
 			c = new HTTPConnection();
+		}else{
+			c = new LocalConnection();
 		}
 		c.setLabel(in.readString());
 		c.setServerAddress(in.readString());

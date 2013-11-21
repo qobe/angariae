@@ -14,7 +14,7 @@ import org.apache.commons.net.ftp.FTPReply;
 
 import android.os.Environment;
 
-public class FTPConnection implements Connection  {
+public class FTPConnection implements Connection {
 
 	private FTPClient ftpc;
 	private String downloadsDir;
@@ -71,14 +71,39 @@ public class FTPConnection implements Connection  {
 	}
 	
 
+	@Override
+	public ArrayList<String> browseUp() throws AnException {
+		ArrayList<String> dirContents = new ArrayList<String>();
+		try {
+			ftpc.changeToParentDirectory();
+			FTPFile[] files = ftpc.listFiles();
+			for(int i=0;i<files.length;i++){
+				dirContents.add(files[i].toString());
+			}
+		} catch (IOException e) {
+			throw new AnException("Error: Connection is closed.",e);
+		}
+		return dirContents;
+	}
+	
+	@Override
+	public ArrayList<String> browsePWD() throws AnException {
+		ArrayList<String> dirContents = new ArrayList<String>();
+		try {
+			FTPFile[] files = ftpc.listFiles();
+			for(int i=0;i<files.length;i++){
+				dirContents.add(files[i].toString());
+			}
+		} catch (IOException e) {
+			throw new AnException("Error: Connection is closed.",e);
+		}
+		return dirContents;
+	}
+	
 	public ArrayList<String> browse(String path) throws AnException{
 		ArrayList<String> dirContents = new ArrayList<String>();
 		try {
-			if(path == ".."){
-				ftpc.changeToParentDirectory();
-			}else if (!path.equalsIgnoreCase(".")){
-				ftpc.changeWorkingDirectory(path);	
-			}
+			ftpc.changeWorkingDirectory(path);	
 			FTPFile[] files = ftpc.listFiles();
 			for(int i=0;i<files.length;i++){
 				dirContents.add(files[i].toString());
@@ -140,4 +165,5 @@ public class FTPConnection implements Connection  {
 	public String getType() {
 		return this.type;
 	}
+
 }
