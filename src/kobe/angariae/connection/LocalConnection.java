@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.os.Environment;
 
+import kobe.angariae.Track;
 import kobe.angariae.exception.AnException;
 
 public class LocalConnection implements Connection{
@@ -75,37 +76,27 @@ public class LocalConnection implements Connection{
 	}
 
 	@Override
-	public ArrayList<String> browse(String path) throws AnException {
-		ArrayList<String> dirList = new ArrayList<String>();
+	public ArrayList<Track> browse(String path) throws AnException {
 		this.pwd = new File(pwd, path);
-		File[] pwdDirList = pwd.listFiles();
-		for(int i=0; i<pwdDirList.length; i++){
-			dirList.add(pwdDirList[i].toString());
-		}
-		return dirList;
+		return browse();
 	}
 
 	@Override
-	public ArrayList<String> browseUp() throws AnException {
-		ArrayList<String> dirList = new ArrayList<String>();
+	public ArrayList<Track> browseUp() throws AnException {
 		if(pwd.getParentFile()==null){
 			throw new AnException("Unable to browse to parent");
 		}else{
 			this.pwd = pwd.getParentFile();
-			File[] pwdDirList = pwd.listFiles();
-			for(int i=0; i<pwdDirList.length; i++){
-				dirList.add(pwdDirList[i].toString());
-			}
 		}
-		return dirList;
+		return browse();
 	}
 
 	@Override
-	public ArrayList<String> browsePWD() throws AnException {
-		ArrayList<String> dirList = new ArrayList<String>();
+	public ArrayList<Track> browse() throws AnException {
+		ArrayList<Track> dirList = new ArrayList<Track>();
 		File[] pwdDirList = pwd.listFiles();
 		for(int i=0; i<pwdDirList.length; i++){
-			dirList.add(pwdDirList[i].toString());
+			dirList.add(new Track(pwdDirList[i]));
 		}
 		return dirList;
 	}

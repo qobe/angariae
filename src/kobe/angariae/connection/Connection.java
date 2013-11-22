@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import android.os.Parcelable;
 
+import kobe.angariae.Track;
 import kobe.angariae.exception.AnException;
 
 public interface Connection{
@@ -21,7 +22,7 @@ public interface Connection{
     public void connect() throws AnException;
     public void disconnect() throws AnException;
     public String download(String file) throws AnException;
-    public ArrayList<String> browse(String path) throws AnException;
-    public ArrayList<String> browsePWD()throws AnException;
-    public ArrayList<String> browseUp()throws AnException;
+    public ArrayList<Track> browse(String path) throws AnException;
+    public ArrayList<Track> browse()throws AnException;
+    public ArrayList<Track> browseUp()throws AnException;
 }

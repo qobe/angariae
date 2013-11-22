@@ -19,7 +19,7 @@
         android:textSize="36sp" />
 
     <ListView
-        android:id="@+id/browseListView"
+        android:id="@+id/android:list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/up_directory"

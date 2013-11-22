@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import kobe.angariae.Track;
 import kobe.angariae.exception.AnException;
 
 import android.os.Environment;
@@ -43,12 +44,6 @@ public class HTTPConnection implements Connection{
 	public void setDownloads() {
 		File f = new File(Environment.getExternalStorageDirectory()+File.separator+label+File.separator);
 		f.mkdirs();
-	}
-
-	@Override
-	public ArrayList<String> browse(String path) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -95,15 +90,20 @@ public class HTTPConnection implements Connection{
 	public String getType() {
 		return this.type ;
 	}
-
 	@Override
-	public ArrayList<String> browseUp() throws AnException {
+	public ArrayList<Track> browse() throws AnException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<String> browsePWD() throws AnException {
+	public ArrayList<Track> browse(String path) throws AnException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Track> browseUp() throws AnException {
 		// TODO Auto-generated method stub
 		return null;
 	}

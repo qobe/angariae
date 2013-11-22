@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import kobe.angariae.Track;
 import kobe.angariae.exception.AnException;
 
 
@@ -48,13 +49,10 @@ public class FTPConnection implements Connection {
 			ftpc.getReplyString();
 			reply = ftpc.getReplyCode();
 			if(!FTPReply.isPositiveCompletion(reply)){
-				ftpc.disconnect();
-				//error, server refused connection
+				ftpc.disconnect();//error, server refused connection
 			}
-			ftpc.user(username);
-			//get reply code
-			ftpc.pass(password);
-			//get, check reply code
+			ftpc.user(username);//get reply code
+			ftpc.pass(password);//get, check reply code
 		}catch(java.net.UnknownHostException e){
 			throw new AnException("Error: Unknown host.",e);
 		}catch(IOException e){			
@@ -70,48 +68,38 @@ public class FTPConnection implements Connection {
 		}
 	}
 	
+	@Override
+	public ArrayList<Track> browse() throws AnException {
+		ArrayList<Track> dirContents = new ArrayList<Track>();
+		try {
+			FTPFile[] files = ftpc.listFiles();
+			for(int i=0;i<files.length;i++){
+				dirContents.add(new Track(files[i]));
+			}
+		} catch (IOException e) {
+			throw new AnException("Error: Connection is closed.",e);
+		}
+		return dirContents;
+	}
 
 	@Override
-	public ArrayList<String> browseUp() throws AnException {
-		ArrayList<String> dirContents = new ArrayList<String>();
+	public ArrayList<Track> browseUp() throws AnException {
 		try {
 			ftpc.changeToParentDirectory();
-			FTPFile[] files = ftpc.listFiles();
-			for(int i=0;i<files.length;i++){
-				dirContents.add(files[i].toString());
-			}
 		} catch (IOException e) {
 			throw new AnException("Error: Connection is closed.",e);
 		}
-		return dirContents;
+		return browse();
 	}
 	
-	@Override
-	public ArrayList<String> browsePWD() throws AnException {
-		ArrayList<String> dirContents = new ArrayList<String>();
-		try {
-			FTPFile[] files = ftpc.listFiles();
-			for(int i=0;i<files.length;i++){
-				dirContents.add(files[i].toString());
-			}
-		} catch (IOException e) {
-			throw new AnException("Error: Connection is closed.",e);
-		}
-		return dirContents;
-	}
 	
-	public ArrayList<String> browse(String path) throws AnException{
-		ArrayList<String> dirContents = new ArrayList<String>();
+	public ArrayList<Track> browse(String path) throws AnException{
 		try {
-			ftpc.changeWorkingDirectory(path);	
-			FTPFile[] files = ftpc.listFiles();
-			for(int i=0;i<files.length;i++){
-				dirContents.add(files[i].toString());
-			}
+			ftpc.changeWorkingDirectory(path);
 		} catch (IOException e) {
 			throw new AnException("Error: Connection is closed.",e);
 		}
-		return dirContents;
+		return browse();
 	}
 	
 	public String download(String filename) throws AnException{
@@ -123,7 +111,6 @@ public class FTPConnection implements Connection {
 				fos.close();
 			}
 		} catch (IOException e) {
-			// connection closure
 			throw new AnException("Error: Connection is closed.",e);
 		}
 		return downloadsDir+filename;

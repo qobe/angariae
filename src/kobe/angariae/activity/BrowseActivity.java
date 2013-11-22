@@ -2,102 +2,96 @@ package kobe.angariae.activity;
 
 import java.util.ArrayList;
 
-import kobe.angariae.AVPlayer;
-import kobe.angariae.DatabaseHelper;
-import kobe.angariae.Playlist;
 import kobe.angariae.R;
+import kobe.angariae.Track;
+import kobe.angariae.TrackAdapter;
 import kobe.angariae.connection.Connection;
-import kobe.angariae.connection.FTPConnection;
-import kobe.angariae.connection.HTTPConnection;
 import kobe.angariae.connection.ParcelableConnection;
 import kobe.angariae.exception.AnException;
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class BrowseActivity extends Activity{
+public class BrowseActivity extends ListActivity{
+	private ArrayList<Track> tracks;
+	private TrackAdapter adapter;
 	private Connection c;
-	private ListView listview;
-	private ArrayAdapter<String> adapter;
-	private ArrayList<String> dirList;
+
+//	http://developer.android.com/reference/android/os/AsyncTask.html
+//	subclass asynctask for all connection/network operations
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
-
         Intent i = getIntent();
         ParcelableConnection pc = (ParcelableConnection)i.getParcelableExtra(Connection.klass);
         c = pc.getConnection();
-        dirList = new ArrayList<String>();
+        tracks = new ArrayList<Track>();
         try {
 			c.connect();
-			dirList = c.browsePWD();
+			tracks = c.browse();
 		} catch (AnException e) {
-			e.makeToast(this);
+			e.makeToast(BrowseActivity.this);
 		}
-        
-        
 
-        listview = (ListView)findViewById(R.id.browseListView);
-        adapter = new ArrayAdapter<String>(BrowseActivity.this, android.R.layout.simple_list_item_1, dirList);
-        listview.setAdapter(adapter);
-        listview.setLongClickable(true);
-        registerForContextMenu(listview);
+        ListView lv = getListView();
+        adapter = new TrackAdapter(BrowseActivity.this, R.layout.list_track, tracks);
+        setListAdapter(adapter);
+        lv.setLongClickable(true);
+        registerForContextMenu(lv);
         
         TextView upDir = (TextView)findViewById(R.id.up_directory);
         upDir.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				try {
-					dirList = c.browseUp();
+					tracks = c.browseUp();
+					adapter.notifyDataSetChanged();
 				} catch (AnException e) {
 					e.makeToast(BrowseActivity.this);
 				}
+			}
+        });      
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id){
+		Track item = tracks.get(position);
+		if(item.isDirectory()){
+			try {
+				tracks = c.browse(item.getName());
 				adapter.notifyDataSetChanged();
+			} catch (AnException e) {
+				e.makeToast(BrowseActivity.this);
 			}
-        });
-        
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-				String item = (String)parent.getItemAtPosition(position);
-				if(!item.matches("*.*")){
-					try {
-						c.browse(item);
-					} catch (AnException e) {
-						e.makeToast(BrowseActivity.this);
-					}
-				}
-//				else av.play(item); //stream from server?
-//				if(item.matches("*.(3gp)|(mp4)|(m4a)|(aac)|(3gp)|(flac)|(mp3)|(wav)|(mid)|(xmf)|(mxmf)|(rtttl)|(rtx)|(ogg)|(mkv)|(ota)|(imy)"))
-			}
-        });       
+		}else if(item.isMusic()||item.isVideo()){
+//			av.play(item);
+		}
 	}
 	
     @Override
     public void onCreateContextMenu(ContextMenu m, View v, ContextMenuInfo mi){
     	super.onCreateContextMenu(m, v, mi);
         AdapterContextMenuInfo info = (AdapterContextMenuInfo)mi;
-        m.add(0, 1, 0, "Add to playlist");
+        m.add(0, 1, 0, "Enque");
+        m.add(0, 2, 0, "Download");
     }
     
     @Override
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    	Track t = tracks.get(info.position);
     	switch (item.getItemId()) {
     	case 1:
-
+    		//add t to playlist
     		break;
     	}
 		return true;

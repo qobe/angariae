@@ -59,10 +59,8 @@ public class MainActivity extends ListActivity {
 
         Connections = new ArrayList<Connection>();
         ConnectionAdapter ca = new ConnectionAdapter(MainActivity.this,R.layout.list_connection, Connections);
-//        ca.setNotifyOnChange(true);
         setListAdapter(ca);
         registerForContextMenu(getListView());
-//        onContentChanged();
         
         
         Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,DatabaseHelper.FIELDS, null, null, null, null, null);
