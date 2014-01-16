@@ -77,23 +77,12 @@ public class LocalConnection implements Connection{
 
 	@Override
 	public ArrayList<Track> browse(String path) throws AnException {
-		this.pwd = new File(pwd, path);
-		return browse();
-	}
-
-	@Override
-	public ArrayList<Track> browseUp() throws AnException {
-		if(pwd.getParentFile()==null){
-			throw new AnException("Unable to browse to parent");
-		}else{
-			this.pwd = pwd.getParentFile();
-		}
-		return browse();
-	}
-
-	@Override
-	public ArrayList<Track> browse() throws AnException {
 		ArrayList<Track> dirList = new ArrayList<Track>();
+		if(path.equals("..")){
+			this.pwd = pwd.getParentFile();			
+		}else if(!path.equals(".")){
+			this.pwd = new File(pwd, path);			
+		}
 		File[] pwdDirList = this.pwd.listFiles();
 		if(pwdDirList != null){
 			for(int i=0; i<pwdDirList.length; i++){
@@ -102,5 +91,4 @@ public class LocalConnection implements Connection{
 		}
 		return dirList;
 	}
-
 }

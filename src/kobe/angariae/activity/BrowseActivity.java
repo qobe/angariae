@@ -26,7 +26,7 @@ import android.widget.TextView;
 public class BrowseActivity extends ListActivity{
 	private ArrayList<Track> trackList;
 	private TrackAdapter adapter;
-	private Connection c;
+	private Connection myConnection;
 
 //	http://developer.android.com/reference/android/os/AsyncTask.html
 //	subclass asynctask for all connection/network operations
@@ -37,12 +37,11 @@ public class BrowseActivity extends ListActivity{
         setContentView(R.layout.activity_browse);
         Intent i = getIntent();
         ParcelableConnection pc = (ParcelableConnection)i.getParcelableExtra(Connection.klass);
-        c = pc.getConnection();
+        myConnection = pc.getConnection();
         trackList = new ArrayList<Track>();
-        //launch asynctask to connect/browse
         
-        new EstablishConnectionTask().execute(c); 
-        new BrowseConnectionTask().execute(c);
+        new EstablishConnectionTask().execute(myConnection); 
+        new BrowseConnectionTask().execute(".");//get listing for current directory
         
 
         ListView lv = getListView();
@@ -55,7 +54,7 @@ public class BrowseActivity extends ListActivity{
         upDir.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				new BrowseUpConnectionTask().execute(c);
+				new BrowseConnectionTask().execute("..");
 			}
         });      
 	}
@@ -70,12 +69,7 @@ public class BrowseActivity extends ListActivity{
 	protected void onListItemClick(ListView l, View v, int position, long id){
 		Track item = trackList.get(position);
 		if(item.isDirectory()){
-			try {
-				trackList = c.browse(item.getName());
-				adapter.notifyDataSetChanged();
-			} catch (AnException e) {
-				e.makeToast(BrowseActivity.this);
-			}
+			new BrowseConnectionTask().execute(item.getPath());
 		}else if(item.isMusic()||item.isVideo()){
 //			av.play(item);
 		}
@@ -90,10 +84,13 @@ public class BrowseActivity extends ListActivity{
     @Override
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-    	Track t = trackList.get(info.position);
+    	Track t = trackList.get(info.position); 
     	switch (item.getItemId()) {
-    	case R.id.:
+    	case R.id.enqueue:
     		//add t to playlist
+    		break;
+    	case R.id.download:
+    		new DownloadTask().execute(t.getName());
     		break;
     	}
     	return true;  
@@ -132,46 +129,33 @@ public class BrowseActivity extends ListActivity{
     	protected void onPostExecute(AnException ae){
     		pb.setProgress(0);
     		pb.setVisibility(View.GONE);
-    		//			ae.makeToast(BrowseActivity.this);
     	}
     }
-  
-    private class BrowseConnectionTask extends AsyncTask<Connection, Void, ArrayList<Track>>{
-    	@Override
-    	protected ArrayList<Track> doInBackground(Connection... conns) {
-    		ArrayList<Track> list = null;
-    		try {
-    			list = conns[0].browse();
-    		} catch (AnException e) {
-    			Log.e("BrowseConnectionTask", e.getMessage());
-    		}
-    		return list;
-    	}
-
-    	@Override
-    	protected void onPostExecute(ArrayList<Track> list){
-    		trackList = list;
-    		updateListView();
-    	}
+     
+    private class BrowseConnectionTask extends AsyncTask<String, Void, ArrayList<Track>>{
+		@Override
+		protected ArrayList<Track> doInBackground(String... paths) {
+			ArrayList<Track> list = null;
+			try {
+				list = myConnection.browse(paths[0]);
+			} catch (AnException e) {
+				Log.e("BrowseToConnectionTask", e.getMessage());
+			}
+			return list;
+		}
     }
-
-    private class BrowseUpConnectionTask extends AsyncTask<Connection, Void, ArrayList<Track>>{
-    	@Override
-    	protected ArrayList<Track> doInBackground(Connection... conns) {
-    		ArrayList<Track> list = null;
-    		try {
-    			list = conns[0].browseUp();
-    		} catch (AnException e) {
-    			Log.e("BrowseUpConnectionTask", e.getMessage());
-    		}
-    		return list;
-    	}
-
-    	@Override
-    	protected void onPostExecute(ArrayList<Track> list){
-    		trackList = list;
-    		updateListView();
-    	}
+    
+    private class DownloadTask extends AsyncTask<String, Integer, String>{
+		@Override
+		protected String doInBackground(String... filenames) {
+			String path = null;
+			try {
+				path = myConnection.download(filenames[0]);
+			} catch (AnException e) {
+				Log.e("DownloadTask", e.getMessage());
+			}
+			return path;
+		}
     }
     
     private void updateListView(){

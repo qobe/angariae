@@ -90,11 +90,6 @@ public class HTTPConnection implements Connection{
 	public String getType() {
 		return this.type ;
 	}
-	@Override
-	public ArrayList<Track> browse() throws AnException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public ArrayList<Track> browse(String path) throws AnException {
@@ -102,9 +97,4 @@ public class HTTPConnection implements Connection{
 		return null;
 	}
 
-	@Override
-	public ArrayList<Track> browseUp() throws AnException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

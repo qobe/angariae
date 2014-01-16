@@ -9,12 +9,14 @@ public class Track{
 	private boolean isFile;
 	private String path;
 	private String name;
+	private long size;
 
 	public Track(File f){
 		this.isDir = f.isDirectory();
 		this.isFile = f.isFile();
 		this.path = f.getAbsolutePath();
 		this.name = f.getName();
+		this.size = f.length();
 	}
 	
 	public Track(FTPFile ff){
@@ -22,6 +24,7 @@ public class Track{
 		this.isFile = ff.isFile();
 		this.path = ff.toString();
 		this.name = ff.getName();
+		this.size = ff.getSize();
 	}
 	
 	public boolean isMusic(){
@@ -54,5 +57,10 @@ public class Track{
 	}
 	public String getName(){
 		return name;
+	}
+
+	//returns file size in bytes
+	public long getSize(){
+		return size;
 	}
 }

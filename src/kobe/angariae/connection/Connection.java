@@ -23,6 +23,4 @@ public interface Connection{
     public void disconnect() throws AnException;
     public String download(String file) throws AnException;
     public ArrayList<Track> browse(String path) throws AnException;
-    public ArrayList<Track> browse()throws AnException;
-    public ArrayList<Track> browseUp()throws AnException;
 }

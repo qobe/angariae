@@ -68,10 +68,14 @@ public class FTPConnection implements Connection {
 		}
 	}
 	
-	@Override
-	public ArrayList<Track> browse() throws AnException {
+	public ArrayList<Track> browse(String path) throws AnException{
 		ArrayList<Track> dirContents = new ArrayList<Track>();
 		try {
+			if(path.equals("..")){
+				ftpc.changeToParentDirectory();
+			}else if(!path.equals(".")){
+				ftpc.changeWorkingDirectory(path);
+			}
 			FTPFile[] files = ftpc.listFiles();
 			for(int i=0;i<files.length;i++){
 				dirContents.add(new Track(files[i]));
@@ -80,26 +84,6 @@ public class FTPConnection implements Connection {
 			throw new AnException("Error: Connection is closed.",e);
 		}
 		return dirContents;
-	}
-
-	@Override
-	public ArrayList<Track> browseUp() throws AnException {
-		try {
-			ftpc.changeToParentDirectory();
-		} catch (IOException e) {
-			throw new AnException("Error: Connection is closed.",e);
-		}
-		return browse();
-	}
-	
-	
-	public ArrayList<Track> browse(String path) throws AnException{
-		try {
-			ftpc.changeWorkingDirectory(path);
-		} catch (IOException e) {
-			throw new AnException("Error: Connection is closed.",e);
-		}
-		return browse();
 	}
 	
 	public String download(String filename) throws AnException{

@@ -24,12 +24,14 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080014;
+        public static final int action_settings=0x7f080016;
         public static final int bottomtext=0x7f080012;
+        public static final int download=0x7f080015;
         public static final int editLabel=0x7f080001;
         public static final int editPassword=0x7f080007;
         public static final int editServerAddress=0x7f080003;
         public static final int editUserName=0x7f080005;
+        public static final int enqueue=0x7f080014;
         public static final int local_connection=0x7f08000f;
         public static final int midtext=0x7f080011;
         public static final int new_connection=0x7f08000e;
