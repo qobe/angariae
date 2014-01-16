@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3
+END
+POP3Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3/POP3Client.java
+END
+POP3SClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3/POP3SClient.java
+END
+POP3Command.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3/POP3Command.java
+END
+POP3Reply.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3/POP3Reply.java
+END
+ExtendedPOP3Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3/ExtendedPOP3Client.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3/package-info.java
+END
+POP3MessageInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3/POP3MessageInfo.java
+END
+POP3.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/pop3/POP3.java
+END

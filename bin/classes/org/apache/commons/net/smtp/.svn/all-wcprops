@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp
+END
+SMTPConnectionClosedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/SMTPConnectionClosedException.java
+END
+SMTPSClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/SMTPSClient.java
+END
+SMTP.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/SMTP.java
+END
+RelayPath.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/RelayPath.java
+END
+SMTPCommand.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/SMTPCommand.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/package-info.java
+END
+SimpleSMTPHeader.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/SimpleSMTPHeader.java
+END
+SMTPReply.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/SMTPReply.java
+END
+AuthenticatingSMTPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/AuthenticatingSMTPClient.java
+END
+SMTPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/smtp/SMTPClient.java
+END

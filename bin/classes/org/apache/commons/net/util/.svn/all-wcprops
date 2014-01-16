@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util
+END
+Base64.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util/Base64.java
+END
+SSLContextUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util/SSLContextUtils.java
+END
+TrustManagerUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util/TrustManagerUtils.java
+END
+Charsets.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util/Charsets.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util/package-info.java
+END
+SubnetUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util/SubnetUtils.java
+END
+KeyManagerUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util/KeyManagerUtils.java
+END
+ListenerList.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/util/ListenerList.java
+END

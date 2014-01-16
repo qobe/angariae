@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/echo
+END
+EchoTCPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/echo/EchoTCPClient.java
+END
+EchoUDPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/echo/EchoUDPClient.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/echo/package-info.java
+END

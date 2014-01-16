@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp
+END
+NNTPCommand.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/NNTPCommand.java
+END
+NNTPReply.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/NNTPReply.java
+END
+NNTPConnectionClosedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/NNTPConnectionClosedException.java
+END
+NNTPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/NNTPClient.java
+END
+ArticlePointer.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/ArticlePointer.java
+END
+ArticleInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/ArticleInfo.java
+END
+Threadable.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/Threadable.java
+END
+ArticleIterator.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/ArticleIterator.java
+END
+NewGroupsOrNewsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/NewGroupsOrNewsQuery.java
+END
+NNTP.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/NNTP.java
+END
+SimpleNNTPHeader.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/SimpleNNTPHeader.java
+END
+NewsgroupIterator.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/NewsgroupIterator.java
+END
+NewsgroupInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/NewsgroupInfo.java
+END
+ReplyIterator.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/ReplyIterator.java
+END
+ThreadContainer.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/ThreadContainer.java
+END
+Threader.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/Threader.java
+END
+Article.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/Article.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/nntp/package-info.java
+END

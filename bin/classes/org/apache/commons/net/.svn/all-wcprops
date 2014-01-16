@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net
+END
+DatagramSocketClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/DatagramSocketClient.java
+END
+SocketClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/SocketClient.java
+END
+ProtocolCommandSupport.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ProtocolCommandSupport.java
+END
+ProtocolCommandEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ProtocolCommandEvent.java
+END
+ProtocolCommandListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/ProtocolCommandListener.java
+END
+DatagramSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/DatagramSocketFactory.java
+END
+DefaultSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/DefaultSocketFactory.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/package-info.java
+END
+DefaultDatagramSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/DefaultDatagramSocketFactory.java
+END
+MalformedServerReplyException.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/MalformedServerReplyException.java
+END
+PrintCommandListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/PrintCommandListener.java
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/imap
+END
+AuthenticatingIMAPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/imap/AuthenticatingIMAPClient.java
+END
+IMAPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/imap/IMAPClient.java
+END
+IMAPSClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/imap/IMAPSClient.java
+END
+IMAPCommand.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/imap/IMAPCommand.java
+END
+IMAPReply.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/imap/IMAPReply.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/imap/package-info.java
+END
+IMAP.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/angariae/apache-src/org/apache/commons/net/imap/IMAP.java
+END
