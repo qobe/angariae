@@ -94,9 +94,11 @@ public class LocalConnection implements Connection{
 	@Override
 	public ArrayList<Track> browse() throws AnException {
 		ArrayList<Track> dirList = new ArrayList<Track>();
-		File[] pwdDirList = pwd.listFiles();
-		for(int i=0; i<pwdDirList.length; i++){
-			dirList.add(new Track(pwdDirList[i]));
+		File[] pwdDirList = this.pwd.listFiles();
+		if(pwdDirList != null){
+			for(int i=0; i<pwdDirList.length; i++){
+				dirList.add(new Track(pwdDirList[i]));
+			}
 		}
 		return dirList;
 	}

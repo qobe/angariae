@@ -34,10 +34,6 @@ public class MainActivity extends ListActivity {
 	public static final String CUSTOM_ACTION_NEW = "kobe.angariae.activity.ACTION_NEW_CONNECTION";
 	private ArrayList<Connection> Connections;
 	
-	private void toast(String msg){
-		Toast t = Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG);
-		t.show();	
-	}
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {

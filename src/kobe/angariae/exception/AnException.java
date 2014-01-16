@@ -21,6 +21,9 @@ public class AnException extends Exception{
 		Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
 		toast.show();
 	}
+	public String getMessage(){
+		return message;
+	}
 //	public void display(Context context){
 //		AlertDialog ad = new AlertDialog(context);
 //	}
