@@ -32,7 +32,7 @@ public class MainActivity extends ListActivity {
 	private static final int EDIT_CONNECTION_ID = 24;
 	public static final String CUSTOM_ACTION_EDIT = "kobe.angariae.activity.ACTION_EDIT_CONNECTION";
 	public static final String CUSTOM_ACTION_NEW = "kobe.angariae.activity.ACTION_NEW_CONNECTION";
-	private ArrayList<Connection> Connections;
+	private ArrayList<Connection> connections;
 	
 	
     @Override
@@ -53,8 +53,8 @@ public class MainActivity extends ListActivity {
 			}
         });
 
-        Connections = new ArrayList<Connection>();
-        ConnectionAdapter ca = new ConnectionAdapter(MainActivity.this,R.layout.list_connection, Connections);
+        connections = new ArrayList<Connection>();
+        ConnectionAdapter ca = new ConnectionAdapter(MainActivity.this,R.layout.list_connection, connections);
         setListAdapter(ca);
         registerForContextMenu(getListView());
         
@@ -72,7 +72,7 @@ public class MainActivity extends ListActivity {
         		c.setServerAddress(cursor.getString(cursor.getColumnIndex(DatabaseHelper.SERVER_ADDRESS)));
         		c.setUserName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_NAME)));
         		c.setPassword(cursor.getString(cursor.getColumnIndex(DatabaseHelper.PASSWORD)));
-        		Connections.add(c);
+        		connections.add(c);
         		cursor.moveToNext();
         	}
         }
@@ -91,7 +91,7 @@ public class MainActivity extends ListActivity {
     
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
-		ParcelableConnection pc = new ParcelableConnection(Connections.get(position));
+		ParcelableConnection pc = new ParcelableConnection(connections.get(position));
 		Intent i = new Intent(MainActivity.this, BrowseActivity.class);
 		i.putExtra(Connection.klass, pc);
 		startActivity(i);//Launch BrowseActivity pass Connection by Intent
@@ -103,7 +103,7 @@ public class MainActivity extends ListActivity {
     	if(resultCode == RESULT_OK){
     		ParcelableConnection pc = (ParcelableConnection)data.getParcelableExtra(Connection.klass);
     		Connection c = pc.getConnection();
-    		Connections.add(c);
+    		connections.add(c);
     		((ConnectionAdapter)getListAdapter()).notifyDataSetChanged();
     		switch(requestCode){
     			case NEW_CONNECTION_ID:
@@ -126,7 +126,7 @@ public class MainActivity extends ListActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
     	super.onCreateContextMenu(menu, v, menuInfo);
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
-    	menu.setHeaderTitle(Connections.get(info.position).getLabel());
+    	menu.setHeaderTitle(connections.get(info.position).getLabel());
     	menu.add(0, 1, 0, "Edit connection");
     	menu.add(0, 2, 1, "Delete connection");
     }
@@ -134,7 +134,7 @@ public class MainActivity extends ListActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-    	Connection c = Connections.get(info.position);
+    	Connection c = connections.get(info.position);
     	switch (item.getItemId()) {
     	case 1:// launch edit connection activity
     		Intent i = new Intent(MainActivity.this, AddConnectionActivity.class);
@@ -148,7 +148,7 @@ public class MainActivity extends ListActivity {
     				DatabaseHelper.TABLE_NAME, DatabaseHelper.LABEL, c.getLabel(),
     				DatabaseHelper.SERVER_ADDRESS, c.getServerAddress(),
     				DatabaseHelper.TYPE, c.getType()));
-    		Connections.remove(info.position);
+    		connections.remove(info.position);
     		((ConnectionAdapter)getListAdapter()).notifyDataSetChanged();
     		break;
     	}

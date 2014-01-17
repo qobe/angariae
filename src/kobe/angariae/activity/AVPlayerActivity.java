@@ -2,11 +2,14 @@ package kobe.angariae.activity;
 
 import java.util.ArrayList;
 
+import kobe.angariae.Playlist;
 import kobe.angariae.Track;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.os.Bundle;
 import android.os.Handler;
 import android.widget.MediaController;
 
@@ -15,14 +18,20 @@ public class AVPlayerActivity extends Activity implements OnPreparedListener, Me
 //	http://stackoverflow.com/questions/16680432/android-mediacontroller-position
 	private static final String TAG = "AudioPlayer";
 	public static final String AUDIO_FILE_NAME = "audioFileName";
-	
 	private MediaPlayer mediaPlayer;
 	private MediaController mediaController;
 	private String audioFile;
 	private Handler handler = new Handler();
+	private ArrayList<Track> trackList;
+	private Playlist currentPlaylist;
 	
-	private ArrayList<Track> currentPlaylist;
 	
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		Intent i = getIntent();
+		trackList = i.getParcelableArrayListExtra(Track.klass);
+		currentPlaylist = new Playlist(trackList, i.getIntExtra("pos",0));
+	}
 	
 	@Override
 	public void onPrepared(MediaPlayer arg0) {

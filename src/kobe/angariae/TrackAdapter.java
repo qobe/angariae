@@ -32,9 +32,9 @@ public class TrackAdapter extends ArrayAdapter<Track>{
 			TextView textv = (TextView)v.findViewById(R.id.tracktext);
 			if(textv != null){
 				if(t.isDirectory()){
-					textv.setText(".::"+t.getName());
+					textv.setText(".::"+t.getTitle());
 				}else{
-					textv.setText(t.getName());
+					textv.setText(t.getTitle());
 				}
 			}
 		}

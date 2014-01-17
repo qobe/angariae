@@ -71,7 +71,10 @@ public class BrowseActivity extends ListActivity{
 		if(item.isDirectory()){
 			new BrowseConnectionTask().execute(item.getPath());
 		}else if(item.isMusic()||item.isVideo()){
-//			av.play(item);
+			Intent i = new Intent(BrowseActivity.this, AVPlayerActivity.class);
+			i.putParcelableArrayListExtra(Track.klass, trackList);
+			i.putExtra("pos", position);
+			startActivity(i);
 		}
 	}
 	
@@ -90,7 +93,7 @@ public class BrowseActivity extends ListActivity{
     		//add t to playlist
     		break;
     	case R.id.download:
-    		new DownloadTask().execute(t.getName());
+    		new DownloadTask().execute(t.getTitle());
     		break;
     	}
     	return true;  

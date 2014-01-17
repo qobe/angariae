@@ -1,61 +1,57 @@
 package kobe.angariae;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class Playlist {
-
+	public static final String klass = "playlist";
 	private int index;
-	private LinkedList<String> list;
+	private ArrayList<Track> playlist;
 	
-	public Playlist(){}
-	
-	public Playlist(LinkedList<String> array){
-		list = new LinkedList<String>();
-		for(int i=0; i<array.size(); i++){
-			list.add(array.get(i));
-		}
-		this.index = 0;
+	public Playlist(ArrayList<Track> list, int i){
+		this.playlist = list;
+		this.index = i;
+		
 	}
 	
-	
-	public String getNext(){
-		this.index++;
-		if(this.index == this.list.size()){
-			index = 0;
-		}
-		return list.get(index);
+	public Playlist(ArrayList<Track> list){
+		this.playlist = list;
 	}
 	
-	public String getPrevious(){
-		this.index--;
-		if(this.index < 0){
-			index = list.size()-1;
-		}
-		return list.get(index);
+	public Track getNext(){
+		this.index = (index+1)%playlist.size();
+		return playlist.get(index);
 	}
 	
-	public String getSelected(int i){
+	public Track getPrevious(){
+		this.index = (index-1)%playlist.size();
+		return playlist.get(index);
+	}
+	
+	public Track getCurrent(){
+		return playlist.get(index);
+	}
+	
+	public Track get(int i){
 		index = i;
-		return list.get(i);
+		return playlist.get(i);
 	}
-	public void deque(){
-		list.remove();
-	}
-	
-	public void deque(int i){
-		list.remove(i);
+
+	public void dequeue(int i){
+		playlist.remove(i);
 	}
 	
-	public void enqueue(String track){
-		list.add(track);		
+	public void enqueue(Track track){
+		playlist.add(track);		
 	}
+	
 	public void shuffle(){
 		Random r = new Random();
-		LinkedList<String> temp = new LinkedList<String>();
-		while(temp.size() < list.size()){
-			temp.add(list.get(r.nextInt(list.size())));
+		ArrayList<Track> temp = new ArrayList<Track>();
+		while(temp.size() < playlist.size()){
+			temp.add(playlist.get(r.nextInt(playlist.size())));
 		}
-		this.list = temp;
+		this.playlist = temp;
 	}
 }

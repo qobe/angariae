@@ -4,16 +4,17 @@ import java.io.File;
 import java.util.ArrayList;
 
 import android.os.Environment;
+import android.util.Log;
 
 import kobe.angariae.Track;
 import kobe.angariae.exception.AnException;
 
 public class LocalConnection implements Connection{
-	private String serverAddress ="LOCAL";
-	private String username = "LOCAL";
-	private String password = "LOCAL";
-	private String label = "LOCAL";
-	private String type = "LOCAL";
+	private static final String serverAddress ="LOCAL";
+	private static final String username = "LOCAL";
+	private static final String password = "LOCAL";
+	private static final String label = "LOCAL";
+	private static final String type = "LOCAL";
 	private File pwd;
 
 	@Override
@@ -58,9 +59,11 @@ public class LocalConnection implements Connection{
 		String extState = Environment.getExternalStorageState();
 		if(!extState.equals(Environment.MEDIA_MOUNTED)){
 			this.pwd = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+			Log.e("public dir", pwd.toString());
 			throw new AnException("External filesystem unavailable");
 		}else{
 			this.pwd = Environment.getExternalStorageDirectory();
+			Log.e("external", pwd.toString());
 //			this.pwd = Environment.getExternalStoragePublicDirectory(extState);
 		}
 	}
@@ -86,6 +89,7 @@ public class LocalConnection implements Connection{
 		File[] pwdDirList = this.pwd.listFiles();
 		if(pwdDirList != null){
 			for(int i=0; i<pwdDirList.length; i++){
+				Log.e("list files", pwdDirList[i].toString());
 				dirList.add(new Track(pwdDirList[i]));
 			}
 		}
