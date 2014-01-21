@@ -40,15 +40,14 @@ public class BrowseActivity extends ListActivity{
         myConnection = pc.getConnection();
         trackList = new ArrayList<Track>();
         
-        new EstablishConnectionTask().execute(myConnection); 
-        new BrowseConnectionTask().execute(".");//get listing for current directory
-        
-
         ListView lv = getListView();
         adapter = new TrackAdapter(BrowseActivity.this, R.layout.list_track, trackList);
         setListAdapter(adapter);
         lv.setLongClickable(true);
         registerForContextMenu(lv);
+        
+        new EstablishConnectionTask().execute(myConnection); 
+        new BrowseConnectionTask().execute(".");//get listing for current directory
         
         TextView upDir = (TextView)findViewById(R.id.up_directory);
         upDir.setOnClickListener(new View.OnClickListener(){
@@ -102,7 +101,6 @@ public class BrowseActivity extends ListActivity{
 //  using AsyncTask
     private class EstablishConnectionTask extends AsyncTask<Connection, Integer, AnException>{
     	private ProgressBar pb;
-    	
     	@Override
     	protected void onPreExecute(){
     		pb = (ProgressBar)findViewById(R.id.progressBar);
@@ -146,6 +144,12 @@ public class BrowseActivity extends ListActivity{
 			}
 			return list;
 		}
+		
+		@Override
+		protected void onPostExecute(ArrayList<Track> a){
+			trackList = a;
+			updateListView();
+		}
     }
     
     private class DownloadTask extends AsyncTask<String, Integer, String>{
@@ -162,6 +166,7 @@ public class BrowseActivity extends ListActivity{
     }
     
     private void updateListView(){
-    	((TrackAdapter)getListAdapter()).notifyDataSetChanged();
+    	TrackAdapter ta = (TrackAdapter)getListAdapter();
+    	ta.notifyDataSetChanged();
     }
 }

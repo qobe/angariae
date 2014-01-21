@@ -57,14 +57,13 @@ public class LocalConnection implements Connection{
 	@Override
 	public void connect() throws AnException {
 		String extState = Environment.getExternalStorageState();
-		if(!extState.equals(Environment.MEDIA_MOUNTED)){
+		if(extState.equals(Environment.MEDIA_MOUNTED)){
 			this.pwd = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
 			Log.e("public dir", pwd.toString());
-			throw new AnException("External filesystem unavailable");
 		}else{
 			this.pwd = Environment.getExternalStorageDirectory();
 			Log.e("external", pwd.toString());
-//			this.pwd = Environment.getExternalStoragePublicDirectory(extState);
+//			throw new AnException("External filesystem unavailable");
 		}
 	}
 
@@ -81,13 +80,15 @@ public class LocalConnection implements Connection{
 	@Override
 	public ArrayList<Track> browse(String path) throws AnException {
 		ArrayList<Track> dirList = new ArrayList<Track>();
+		Log.e("browse-path", path);
 		if(path.equals("..")){
 			this.pwd = pwd.getParentFile();			
 		}else if(!path.equals(".")){
-			this.pwd = new File(pwd, path);			
+			this.pwd = new File(pwd, path);
 		}
-		File[] pwdDirList = this.pwd.listFiles();
-		if(pwdDirList != null){
+		boolean check = this.pwd.isDirectory();
+		if(check){
+			File[] pwdDirList = this.pwd.listFiles();
 			for(int i=0; i<pwdDirList.length; i++){
 				Log.e("list files", pwdDirList[i].toString());
 				dirList.add(new Track(pwdDirList[i]));

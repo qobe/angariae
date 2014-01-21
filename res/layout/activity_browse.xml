@@ -21,11 +21,11 @@
     <ListView
         android:id="@+id/android:list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignLeft="@+id/up_directory"
-        android:layout_below="@+id/up_directory" >
+        android:layout_below="@+id/up_directory" />
 
-    </ListView>
+   
 
     <ProgressBar
         android:id="@+id/progressBar"

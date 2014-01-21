@@ -58,7 +58,7 @@ public class MainActivity extends ListActivity {
         setListAdapter(ca);
         registerForContextMenu(getListView());
         
-        
+        //Access database and pull connection information
         Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,DatabaseHelper.FIELDS, null, null, null, null, null);
         if(cursor != null && cursor.moveToFirst()){
         	Connection c;
