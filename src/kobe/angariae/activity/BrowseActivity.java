@@ -24,9 +24,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class BrowseActivity extends ListActivity{
-	private ArrayList<Track> trackList;
-	private TrackAdapter adapter;
-	private Connection myConnection;
+	private ArrayList<Track> mTrackList;
+	private TrackAdapter mAdapter;
+	private Connection mConnection;
 
 //	http://developer.android.com/reference/android/os/AsyncTask.html
 //	subclass asynctask for all connection/network operations
@@ -37,17 +37,19 @@ public class BrowseActivity extends ListActivity{
         setContentView(R.layout.activity_browse);
         Intent i = getIntent();
         ParcelableConnection pc = (ParcelableConnection)i.getParcelableExtra(Connection.klass);
-        myConnection = pc.getConnection();
-        trackList = new ArrayList<Track>();
+        mConnection = pc.getConnection();
+        mTrackList = new ArrayList<Track>();
+        
         
         ListView lv = getListView();
-        adapter = new TrackAdapter(BrowseActivity.this, R.layout.list_track, trackList);
-        setListAdapter(adapter);
+        mAdapter = new TrackAdapter(BrowseActivity.this, R.layout.list_track, mTrackList);
+        setListAdapter(mAdapter);
         lv.setLongClickable(true);
         registerForContextMenu(lv);
         
-        new EstablishConnectionTask().execute(myConnection); 
+        new EstablishConnectionTask().execute(mConnection); 
         new BrowseConnectionTask().execute(".");//get listing for current directory
+        
         
         TextView upDir = (TextView)findViewById(R.id.up_directory);
         upDir.setOnClickListener(new View.OnClickListener(){
@@ -61,17 +63,18 @@ public class BrowseActivity extends ListActivity{
 	@Override
 	protected void onResume(){
 		super.onResume();
-		updateListView();
+		((TrackAdapter)getListAdapter()).notifyDataSetChanged();
 	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id){
-		Track item = trackList.get(position);
+		Track item = mTrackList.get(position);
 		if(item.isDirectory()){
+			Log.e("onListItemClick:", item.getPath());
 			new BrowseConnectionTask().execute(item.getPath());
 		}else if(item.isMusic()||item.isVideo()){
 			Intent i = new Intent(BrowseActivity.this, AVPlayerActivity.class);
-			i.putParcelableArrayListExtra(Track.klass, trackList);
+			i.putParcelableArrayListExtra(Track.klass, mTrackList);
 			i.putExtra("pos", position);
 			startActivity(i);
 		}
@@ -86,7 +89,7 @@ public class BrowseActivity extends ListActivity{
     @Override
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-    	Track t = trackList.get(info.position); 
+    	Track t = mTrackList.get(info.position); 
     	switch (item.getItemId()) {
     	case R.id.enqueue:
     		//add t to playlist
@@ -138,7 +141,7 @@ public class BrowseActivity extends ListActivity{
 		protected ArrayList<Track> doInBackground(String... paths) {
 			ArrayList<Track> list = null;
 			try {
-				list = myConnection.browse(paths[0]);
+				list = mConnection.browse(paths[0]);
 			} catch (AnException e) {
 				Log.e("BrowseToConnectionTask", e.getMessage());
 			}
@@ -146,9 +149,11 @@ public class BrowseActivity extends ListActivity{
 		}
 		
 		@Override
-		protected void onPostExecute(ArrayList<Track> a){
-			trackList = a;
-			updateListView();
+		protected void onPostExecute(ArrayList<Track> result){
+			super.onPostExecute(result);
+			mTrackList.clear();
+			mTrackList.addAll(result);
+			((TrackAdapter)getListAdapter()).notifyDataSetChanged();
 		}
     }
     
@@ -157,7 +162,7 @@ public class BrowseActivity extends ListActivity{
 		protected String doInBackground(String... filenames) {
 			String path = null;
 			try {
-				path = myConnection.download(filenames[0]);
+				path = mConnection.download(filenames[0]);
 			} catch (AnException e) {
 				Log.e("DownloadTask", e.getMessage());
 			}
@@ -165,8 +170,4 @@ public class BrowseActivity extends ListActivity{
 		}
     }
     
-    private void updateListView(){
-    	TrackAdapter ta = (TrackAdapter)getListAdapter();
-    	ta.notifyDataSetChanged();
-    }
 }

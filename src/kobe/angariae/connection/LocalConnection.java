@@ -84,7 +84,7 @@ public class LocalConnection implements Connection{
 		if(path.equals("..")){
 			this.pwd = pwd.getParentFile();			
 		}else if(!path.equals(".")){
-			this.pwd = new File(pwd, path);
+			this.pwd = new File(path);
 		}
 		boolean check = this.pwd.isDirectory();
 		if(check){

@@ -39,8 +39,7 @@ public class Track implements Parcelable{
 	
 	public boolean isMusic(){
 		boolean result=false;
-		String pattern = "*.(3gp)|(mp4)|(m4a)|(aac)|(3gp)|(flac)|(mp3)|(wav)|"
-				+"(mid)|(xmf)|(mxmf)|(rtttl)|(rtx)|(ogg)|(mkv)|(ota)|(imy)";
+		String pattern = ".*.(3gp|mp4|m4a|aac|3gp|flac|mp3|wav|mid|xmf|mxmf|rtttl|rtx|ogg|mkv|ota|imy)";
 		if(title.toLowerCase().matches(pattern)){
 			result = true;
 		}
@@ -49,7 +48,7 @@ public class Track implements Parcelable{
 	
 	public boolean isVideo(){
 		boolean result=false;
-		String pattern = "*.(3gp)|(mp4)|(ts)|(webm)|(mkv)";
+		String pattern = "*.(3gp|mp4|ts|webm|mkv)";
 		if(title.toLowerCase().matches(pattern)){
 			result = true;
 		}
