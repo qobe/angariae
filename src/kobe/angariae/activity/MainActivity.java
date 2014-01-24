@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kobe.angariae.DatabaseHelper;
 import kobe.angariae.R;
+import kobe.angariae.TrackAdapter;
 import kobe.angariae.connection.Connection;
 import kobe.angariae.connection.ConnectionAdapter;
 import kobe.angariae.connection.FTPConnection;
@@ -89,6 +90,12 @@ public class MainActivity extends ListActivity {
         });
       }
     
+	@Override
+	protected void onResume(){
+		super.onResume();
+		((ConnectionAdapter)getListAdapter()).notifyDataSetChanged();
+	}
+	
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
 		ParcelableConnection pc = new ParcelableConnection(connections.get(position));
@@ -161,6 +168,5 @@ public class MainActivity extends ListActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
     
 }
