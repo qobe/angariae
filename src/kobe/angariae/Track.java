@@ -48,7 +48,7 @@ public class Track implements Parcelable{
 	
 	public boolean isVideo(){
 		boolean result=false;
-		String pattern = "*.(3gp|mp4|ts|webm|mkv)";
+		String pattern = ".*.(3gp|mp4|ts|webm|mkv)";
 		if(title.toLowerCase().matches(pattern)){
 			result = true;
 		}

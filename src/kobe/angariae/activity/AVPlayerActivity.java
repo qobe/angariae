@@ -15,63 +15,91 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 public class AVPlayerActivity extends Activity implements OnPreparedListener, MediaController.MediaPlayerControl{
 //		http://stackoverflow.com/questions/3747139/how-can-i-show-a-mediacontroller-while-playing-audio-in-android
 //	http://stackoverflow.com/questions/16680432/android-mediacontroller-position
 	
 //if video, add wakelock
-	private static final String TAG = "AudioPlayer";
-	public static final String AUDIO_FILE_NAME = "audioFileName";
 	private MediaPlayer mediaPlayer;
 	private MediaController mediaController;
-	private String audioFile;
 	private Handler handler = new Handler();
 	private ArrayList<Track> trackList;
 	private Playlist currentPlaylist;
+	private VideoView mVideoView;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_avplayer);
+		mVideoView = (VideoView)findViewById(R.id.videoView1);
+		
 		Intent i = getIntent();
 		trackList = i.getParcelableArrayListExtra(Track.klass);
 		currentPlaylist = new Playlist(trackList, i.getIntExtra("pos",0));
-		
-		
-//		((TextView)findViewById(R.id.now_playing_text)).setText(currentPlaylist.getCurrent().getTitle());
-		TextView t = (TextView)findViewById(R.id.now_playing_text);
-		audioFile = currentPlaylist.getCurrent().getTitle();
-		t.setText(audioFile);
 		
 	    mediaPlayer = new MediaPlayer();
 	    mediaPlayer.setOnPreparedListener(this);
 
 	    mediaController = new MediaController(this);
-	    audioFile = currentPlaylist.getCurrent().getPath();
-	    try {
-	    	
-	      mediaPlayer.setDataSource(audioFile);
-	      mediaPlayer.prepare();
-	      mediaPlayer.start();
-	    } catch (IOException e) {
-	      Log.e(TAG, "Could not open file " + audioFile + " for playback.", e);
-	    }
+	    mVideoView.setMediaController(mediaController);
+	    mVideoView.setVisibility(VideoView.INVISIBLE);
+	    
+//	    set controls for next and previous
+	    mediaController.setPrevNextListeners(new View.OnClickListener() {
+			@Override
+			public void onClick(View next) {
+				prepareToStart(currentPlaylist.getNext());
+			}
+		}, new View.OnClickListener() {
+			@Override
+			public void onClick(View prev) {
+				prepareToStart(currentPlaylist.getPrevious());
+			}
+		});
+	    
+	   prepareToStart(currentPlaylist.getCurrent());
+	}
+	
+	private void prepareToStart(Track dataSource){
+		try {
+			if(dataSource.isVideo()){
+				mediaController.setMediaPlayer(mVideoView);
+			    mVideoView.setVisibility(VideoView.VISIBLE);
+				mVideoView.setVideoPath(dataSource.getPath());
+				mVideoView.start();
+			}
+			else{
+				mediaPlayer.reset();
+				mVideoView.setVisibility(VideoView.INVISIBLE);
+				mediaPlayer.setDataSource(dataSource.getPath());
+				mediaPlayer.prepare();
+				mediaPlayer.start();
+			}
+			((TextView)findViewById(R.id.now_playing_text)).setText(currentPlaylist.getCurrent().getTitle());
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
 	 public void onPrepared(MediaPlayer mediaPlayer) {
-	    Log.d(TAG, "onPrepared");
 	    mediaController.setMediaPlayer(this);
 	    mediaController.setAnchorView(findViewById(R.id.main_audio_view));
-
 	    handler.post(new Runnable() {
 	      public void run() {
 	        mediaController.setEnabled(true);
 	        mediaController.show();
-	        Log.d(TAG, ((Boolean)mediaController.isShowing()).toString());
 	      }
 	    });
 	  }
@@ -83,6 +111,7 @@ public class AVPlayerActivity extends Activity implements OnPreparedListener, Me
 	    mediaPlayer.stop();
 	    mediaPlayer.release();
 	}
+	
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
